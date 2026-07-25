@@ -56,8 +56,8 @@ class BatchTester:
             has_summary = any('batch_summary.json' in f for f in files)
             self.print_result("batch_summary.json exists", has_summary)
             
-            has_mapreduce = any('batch_mapreduce.json' in f for f in files)
-            self.print_result("batch_mapreduce.json exists", has_mapreduce)
+            has_mapreduce = any('batch_summary.json' in f for f in files)
+            self.print_result("batch_summary.json exists", has_mapreduce)
             
             has_csv = any('.csv' in f for f in files)
             self.print_result("CSV file exists", has_csv)

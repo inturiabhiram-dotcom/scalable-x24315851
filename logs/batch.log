@@ -1,48 +1,1025 @@
 Setting default log level to "WARN".
 To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
-26/07/24 13:54:34 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+26/07/25 06:37:26 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
 /home/ec2-user/venv/lib64/python3.9/site-packages/boto3/compat.py:89: PythonDeprecationWarning: Boto3 will no longer support Python 3.9 starting April 29, 2026. To continue receiving service updates, bug fixes, and security updates please upgrade to Python 3.10 or later. More information can be found here: https://aws.amazon.com/blogs/developer/python-support-policy-updates-for-aws-sdks-and-tools/
   warnings.warn(warning, PythonDeprecationWarning)
-[Stage 0:>                                                          (0 + 1) / 1][Stage 0:===========================================================(1 + 0) / 1]                                                                                📋 Batch Configuration:
-   Interval: 1 minutes
-   Source: S3/raw_batch/ (batched files - 100 records each)
+[Stage 0:>                                                          (0 + 1) / 1]                                                                                [Stage 7:>                                                          (0 + 2) / 2]                                                                                📋 Batch Configuration:
+   Interval: 60 seconds
+   Source: S3/raw_batch/ (batched files)
+   Mode: DEBUG MODE - Printing min/max values
 
 ============================================================
-🚀 [2026-07-24 13:54:36] Starting PySpark MapReduce Batch
-   (Reading batched data from S3/raw_batch/)
+🔄 Continuous Batch Processing Started (DEBUG MODE)
+   Interval: Every 60 seconds
+   Press Ctrl+C to stop
 ============================================================
 
-📥 [2026-07-24 13:54:36] Reading batched data from S3/raw_batch/...
+############################################################
+# BATCH RUN #1 (DEBUG MODE)
+############################################################
+
+============================================================
+🚀 [2026-07-25 06:37:29] Starting PySpark MapReduce Batch
+   (DEBUG MODE - Tracking min/max values)
+============================================================
+
+📥 [2026-07-25 06:37:29] Reading batched data from S3/raw_batch/...
+
+✅ Total batch files: 0, Valid records: 0 (skipped 0 invalid)
+   Time: 0.05s
+
+📊 DEBUG - Min/Max from raw data (before MapReduce):
+❌ No valid data found in S3/raw_batch/!
+⚠️ Batch #1 failed or no data
+
+⏳ Waiting 60 seconds until next batch...
+
+############################################################
+# BATCH RUN #2 (DEBUG MODE)
+############################################################
+
+============================================================
+🚀 [2026-07-25 06:38:31] Starting PySpark MapReduce Batch
+   (DEBUG MODE - Tracking min/max values)
+============================================================
+
+📥 [2026-07-25 06:38:31] Reading batched data from S3/raw_batch/...
    Page 1: found 1 batch files (total: 1)
-✅ Total batch files: 1, Valid records: 54 (skipped 0 invalid) in 0.12s
-   Sample valid trade: {
-  "time": "2026-07-24T13:51:50.619119Z",
-  "product": "BTC-USD",
-  "price": 64061.98,
-  "size": 0.03035733,
-  "side": "sell",
-  "trade_id": 1061648249,
-  "received_at": "2026-07-24T13:51:50.624281+00:00"
-}
 
-📊 Processing 54 valid trades using MapReduce...
-   Map phase: 324 key-value pairs generated in 0.22s
-   Reduce phase: 20 keys aggregated in 0.89s
-   BTC-USD: 25 trades, avg $64037.84, Buys: 7, Sells: 18
-   ETH-USD: 28 trades, avg $1852.72, Buys: 18, Sells: 10
-   SOL-USD: 1 trades, avg $74.19, Buys: 0, Sells: 1
-  ✅ JSON saved to batch/batch_mapreduce.json
-  ✅ Updated batch/batch_summary.json
+✅ Total batch files: 1, Valid records: 55 (skipped 0 invalid)
+   Time: 0.09s
+
+📊 DEBUG - Min/Max from raw data (before MapReduce):
+   BTC-USD: min=$63,929.80, max=$63,942.84, count=52
+   ETH-USD: min=$1,854.90, max=$1,854.90, count=1
+   SOL-USD: min=$73.77, max=$73.79, count=2
+
+📊 Processing 55 valid trades using MapReduce...
+
+🔍 DEBUG - Sample trades from RDD:
+   Trade 1: product=BTC-USD, price=63929.8, side=sell
+   Trade 2: product=BTC-USD, price=63929.8, side=sell
+   Trade 3: product=BTC-USD, price=63929.8, side=sell
+   Trade 4: product=BTC-USD, price=63929.8, side=sell
+   Trade 5: product=BTC-USD, price=63931.79, side=sell
+   Trade 6: product=BTC-USD, price=63931.79, side=sell
+   Trade 7: product=BTC-USD, price=63931.79, side=sell
+   Trade 8: product=BTC-USD, price=63931.79, side=sell
+   Trade 9: product=BTC-USD, price=63931.79, side=sell
+   Trade 10: product=BTC-USD, price=63931.79, side=sell
+
+   Map phase: 330 key-value pairs generated in 0.15s
+
+🔍 DEBUG - Sample mapped keys:
+   BTC-USD_count
+   BTC-USD_price_sum
+   BTC-USD_price_max
+   BTC-USD_price_min
+   BTC-USD_volume
+   BTC-USD_sell_count
+   BTC-USD_count
+   BTC-USD_price_sum
+   BTC-USD_price_max
+   BTC-USD_price_min
+   BTC-USD_volume
+   BTC-USD_sell_count
+   BTC-USD_count
+   BTC-USD_price_sum
+   BTC-USD_price_max
+   BTC-USD_price_min
+   BTC-USD_volume
+   BTC-USD_sell_count
+   BTC-USD_count
+   BTC-USD_price_sum
+
+   Reduce phase: 19 keys aggregated in 1.24s
+
+🔍 DEBUG - All price-related keys from reduce phase:
+   BTC-USD_price_max: 3324547.9800000014
+   BTC-USD_price_min: 3324547.9800000014
+   BTC-USD_price_sum: 3324547.9800000014
+   ETH-USD_price_max: 1854.9
+   ETH-USD_price_min: 1854.9
+   ETH-USD_price_sum: 1854.9
+   SOL-USD_price_max: 147.56
+   SOL-USD_price_min: 147.56
+   SOL-USD_price_sum: 147.56
+   🔍 DEBUG - price_max for BTC-USD: 3324547.9800000014
+   🔍 DEBUG - price_max for SOL-USD: 147.56
+   🔍 DEBUG - price_sum for BTC-USD: 3324547.9800000014
+   🔍 DEBUG - price_min for BTC-USD: 3324547.9800000014
+   🔍 DEBUG - price_sum for ETH-USD: 1854.9
+   🔍 DEBUG - price_max for ETH-USD: 1854.9
+   🔍 DEBUG - price_min for ETH-USD: 1854.9
+   🔍 DEBUG - price_sum for SOL-USD: 147.56
+   🔍 DEBUG - price_min for SOL-USD: 147.56
+
+🔍 DEBUG - Final product aggregations:
+   BTC-USD:
+      count: 52
+      price_sum: 3324547.9800000014
+      price_max: 3324547.9800000014
+      price_min: 3324547.9800000014
+      volume: 0.0012985400000000002
+      buy_count: 26
+      sell_count: 26
+   ETH-USD:
+      count: 1
+      price_sum: 1854.9
+      price_max: 1854.9
+      price_min: 1854.9
+      volume: 2.1e-06
+      buy_count: 1
+      sell_count: 0
+   SOL-USD:
+      count: 2
+      price_sum: 147.56
+      price_max: 147.56
+      price_min: 147.56
+      volume: 0.33641114
+      buy_count: 0
+      sell_count: 2
+
+   ✅ FINAL: BTC-USD: 52 trades, avg $63933.62, Price Range: $3,324,547.98 - $3,324,547.98
+
+   ✅ FINAL: ETH-USD: 1 trades, avg $1854.90, Price Range: $1,854.90 - $1,854.90
+
+   ✅ FINAL: SOL-USD: 2 trades, avg $73.78, Price Range: $147.56 - $147.56
+  ✅ JSON saved to batch/batch_summary.json
   ✅ CSV saved to S3
 
 ✅ Generated 3 product summaries
 
-============================================================
-✅ [2026-07-24 13:54:40] Batch Processing Complete!
-   Products: 3
-   Total Valid Trades: 54
-   Total Time: 1.45s
-============================================================
-✅ PySpark stopped
+✅ Batch completed in 2.07s
+✅ Batch #2 completed successfully!
 
-✅ Batch completed successfully! Processed 3 products.
+⏳ Waiting 60 seconds until next batch...
+
+############################################################
+# BATCH RUN #3 (DEBUG MODE)
+############################################################
+
+============================================================
+🚀 [2026-07-25 06:39:33] Starting PySpark MapReduce Batch
+   (DEBUG MODE - Tracking min/max values)
+============================================================
+
+📥 [2026-07-25 06:39:33] Reading batched data from S3/raw_batch/...
+   Page 1: found 2 batch files (total: 2)
+
+✅ Total batch files: 2, Valid records: 108 (skipped 0 invalid)
+   Time: 0.11s
+
+📊 DEBUG - Min/Max from raw data (before MapReduce):
+   BTC-USD: min=$63,929.80, max=$63,961.99, count=99
+   ETH-USD: min=$1,854.90, max=$1,855.20, count=7
+   SOL-USD: min=$73.77, max=$73.79, count=2
+
+📊 Processing 108 valid trades using MapReduce...
+
+🔍 DEBUG - Sample trades from RDD:
+   Trade 1: product=BTC-USD, price=63929.8, side=sell
+   Trade 2: product=BTC-USD, price=63929.8, side=sell
+   Trade 3: product=BTC-USD, price=63929.8, side=sell
+   Trade 4: product=BTC-USD, price=63929.8, side=sell
+   Trade 5: product=BTC-USD, price=63931.79, side=sell
+   Trade 6: product=BTC-USD, price=63931.79, side=sell
+   Trade 7: product=BTC-USD, price=63931.79, side=sell
+   Trade 8: product=BTC-USD, price=63931.79, side=sell
+   Trade 9: product=BTC-USD, price=63931.79, side=sell
+   Trade 10: product=BTC-USD, price=63931.79, side=sell
+
+   Map phase: 648 key-value pairs generated in 0.21s
+
+🔍 DEBUG - Sample mapped keys:
+   BTC-USD_count
+   BTC-USD_price_sum
+   BTC-USD_price_max
+   BTC-USD_price_min
+   BTC-USD_volume
+   BTC-USD_sell_count
+   BTC-USD_count
+   BTC-USD_price_sum
+   BTC-USD_price_max
+   BTC-USD_price_min
+   BTC-USD_volume
+   BTC-USD_sell_count
+   BTC-USD_count
+   BTC-USD_price_sum
+   BTC-USD_price_max
+   BTC-USD_price_min
+   BTC-USD_volume
+   BTC-USD_sell_count
+   BTC-USD_count
+   BTC-USD_price_sum
+
+   Reduce phase: 20 keys aggregated in 0.50s
+
+🔍 DEBUG - All price-related keys from reduce phase:
+   BTC-USD_price_max: 6330524.869999999
+   BTC-USD_price_min: 6330524.869999999
+   BTC-USD_price_sum: 6330524.869999999
+   ETH-USD_price_max: 12985.269999999999
+   ETH-USD_price_min: 12985.269999999999
+   ETH-USD_price_sum: 12985.269999999999
+   SOL-USD_price_max: 147.56
+   SOL-USD_price_min: 147.56
+   SOL-USD_price_sum: 147.56
+   🔍 DEBUG - price_max for BTC-USD: 6330524.869999999
+   🔍 DEBUG - price_max for SOL-USD: 147.56
+   🔍 DEBUG - price_sum for BTC-USD: 6330524.869999999
+   🔍 DEBUG - price_min for BTC-USD: 6330524.869999999
+   🔍 DEBUG - price_sum for ETH-USD: 12985.269999999999
+   🔍 DEBUG - price_max for ETH-USD: 12985.269999999999
+   🔍 DEBUG - price_min for ETH-USD: 12985.269999999999
+   🔍 DEBUG - price_sum for SOL-USD: 147.56
+   🔍 DEBUG - price_min for SOL-USD: 147.56
+
+🔍 DEBUG - Final product aggregations:
+   BTC-USD:
+      count: 99
+      price_sum: 6330524.869999999
+      price_max: 6330524.869999999
+      price_min: 6330524.869999999
+      volume: 0.0037608000000000008
+      buy_count: 68
+      sell_count: 31
+   ETH-USD:
+      count: 7
+      price_sum: 12985.269999999999
+      price_max: 12985.269999999999
+      price_min: 12985.269999999999
+      volume: 1.1130644699999999
+      buy_count: 2
+      sell_count: 5
+   SOL-USD:
+      count: 2
+      price_sum: 147.56
+      price_max: 147.56
+      price_min: 147.56
+      volume: 0.33641114
+      buy_count: 0
+      sell_count: 2
+
+   ✅ FINAL: BTC-USD: 99 trades, avg $63944.70, Price Range: $6,330,524.87 - $6,330,524.87
+
+   ✅ FINAL: ETH-USD: 7 trades, avg $1855.04, Price Range: $12,985.27 - $12,985.27
+
+   ✅ FINAL: SOL-USD: 2 trades, avg $73.78, Price Range: $147.56 - $147.56
+  ✅ JSON saved to batch/batch_summary.json
+  ✅ CSV saved to S3
+
+✅ Generated 3 product summaries
+
+✅ Batch completed in 1.29s
+✅ Batch #3 completed successfully!
+
+⏳ Waiting 60 seconds until next batch...
+
+############################################################
+# BATCH RUN #4 (DEBUG MODE)
+############################################################
+
+============================================================
+🚀 [2026-07-25 06:40:35] Starting PySpark MapReduce Batch
+   (DEBUG MODE - Tracking min/max values)
+============================================================
+
+📥 [2026-07-25 06:40:35] Reading batched data from S3/raw_batch/...
+   Page 1: found 3 batch files (total: 3)
+
+✅ Total batch files: 3, Valid records: 158 (skipped 0 invalid)
+   Time: 0.13s
+
+📊 DEBUG - Min/Max from raw data (before MapReduce):
+   BTC-USD: min=$63,929.80, max=$63,961.99, count=144
+   ETH-USD: min=$1,854.89, max=$1,855.20, count=11
+   SOL-USD: min=$73.77, max=$73.84, count=3
+
+📊 Processing 158 valid trades using MapReduce...
+
+🔍 DEBUG - Sample trades from RDD:
+   Trade 1: product=BTC-USD, price=63929.8, side=sell
+   Trade 2: product=BTC-USD, price=63929.8, side=sell
+   Trade 3: product=BTC-USD, price=63929.8, side=sell
+   Trade 4: product=BTC-USD, price=63929.8, side=sell
+   Trade 5: product=BTC-USD, price=63931.79, side=sell
+   Trade 6: product=BTC-USD, price=63931.79, side=sell
+   Trade 7: product=BTC-USD, price=63931.79, side=sell
+   Trade 8: product=BTC-USD, price=63931.79, side=sell
+   Trade 9: product=BTC-USD, price=63931.79, side=sell
+   Trade 10: product=BTC-USD, price=63931.79, side=sell
+
+   Map phase: 948 key-value pairs generated in 0.20s
+
+🔍 DEBUG - Sample mapped keys:
+   BTC-USD_count
+   BTC-USD_price_sum
+   BTC-USD_price_max
+   BTC-USD_price_min
+   BTC-USD_volume
+   BTC-USD_sell_count
+   BTC-USD_count
+   BTC-USD_price_sum
+   BTC-USD_price_max
+   BTC-USD_price_min
+   BTC-USD_volume
+   BTC-USD_sell_count
+   BTC-USD_count
+   BTC-USD_price_sum
+   BTC-USD_price_max
+   BTC-USD_price_min
+   BTC-USD_volume
+   BTC-USD_sell_count
+   BTC-USD_count
+   BTC-USD_price_sum
+
+   Reduce phase: 20 keys aggregated in 0.40s
+
+🔍 DEBUG - All price-related keys from reduce phase:
+   BTC-USD_price_max: 9208814.140000006
+   BTC-USD_price_min: 9208814.140000006
+   BTC-USD_price_sum: 9208814.140000006
+   ETH-USD_price_max: 20405.23
+   ETH-USD_price_min: 20405.23
+   ETH-USD_price_sum: 20405.23
+   SOL-USD_price_max: 221.4
+   SOL-USD_price_min: 221.4
+   SOL-USD_price_sum: 221.4
+   🔍 DEBUG - price_max for BTC-USD: 9208814.140000006
+   🔍 DEBUG - price_max for SOL-USD: 221.4
+   🔍 DEBUG - price_sum for BTC-USD: 9208814.140000006
+   🔍 DEBUG - price_min for BTC-USD: 9208814.140000006
+   🔍 DEBUG - price_sum for ETH-USD: 20405.23
+   🔍 DEBUG - price_max for ETH-USD: 20405.23
+   🔍 DEBUG - price_min for ETH-USD: 20405.23
+   🔍 DEBUG - price_sum for SOL-USD: 221.4
+   🔍 DEBUG - price_min for SOL-USD: 221.4
+
+🔍 DEBUG - Final product aggregations:
+   BTC-USD:
+      count: 144
+      price_sum: 9208814.140000006
+      price_max: 9208814.140000006
+      price_min: 9208814.140000006
+      volume: 0.10849931000000002
+      buy_count: 96
+      sell_count: 48
+   ETH-USD:
+      count: 11
+      price_sum: 20405.23
+      price_max: 20405.23
+      price_min: 20405.23
+      volume: 1.1165352800000001
+      buy_count: 4
+      sell_count: 7
+   SOL-USD:
+      count: 3
+      price_sum: 221.4
+      price_max: 221.4
+      price_min: 221.4
+      volume: 0.33644466
+      buy_count: 0
+      sell_count: 3
+
+   ✅ FINAL: BTC-USD: 144 trades, avg $63950.10, Price Range: $9,208,814.14 - $9,208,814.14
+
+   ✅ FINAL: ETH-USD: 11 trades, avg $1855.02, Price Range: $20,405.23 - $20,405.23
+
+   ✅ FINAL: SOL-USD: 3 trades, avg $73.80, Price Range: $221.40 - $221.40
+  ✅ JSON saved to batch/batch_summary.json
+  ✅ CSV saved to S3
+
+✅ Generated 3 product summaries
+
+✅ Batch completed in 1.35s
+✅ Batch #4 completed successfully!
+
+⏳ Waiting 60 seconds until next batch...
+
+############################################################
+# BATCH RUN #5 (DEBUG MODE)
+############################################################
+
+============================================================
+🚀 [2026-07-25 06:41:37] Starting PySpark MapReduce Batch
+   (DEBUG MODE - Tracking min/max values)
+============================================================
+
+📥 [2026-07-25 06:41:37] Reading batched data from S3/raw_batch/...
+   Page 1: found 4 batch files (total: 4)
+
+✅ Total batch files: 4, Valid records: 189 (skipped 0 invalid)
+   Time: 0.16s
+
+📊 DEBUG - Min/Max from raw data (before MapReduce):
+   BTC-USD: min=$63,929.80, max=$63,961.99, count=164
+   ETH-USD: min=$1,854.26, max=$1,855.20, count=18
+   SOL-USD: min=$73.77, max=$73.84, count=6
+   DOGE-USD: min=$0.07, max=$0.07, count=1
+
+📊 Processing 189 valid trades using MapReduce...
+
+🔍 DEBUG - Sample trades from RDD:
+   Trade 1: product=BTC-USD, price=63929.8, side=sell
+   Trade 2: product=BTC-USD, price=63929.8, side=sell
+   Trade 3: product=BTC-USD, price=63929.8, side=sell
+   Trade 4: product=BTC-USD, price=63929.8, side=sell
+   Trade 5: product=BTC-USD, price=63931.79, side=sell
+   Trade 6: product=BTC-USD, price=63931.79, side=sell
+   Trade 7: product=BTC-USD, price=63931.79, side=sell
+   Trade 8: product=BTC-USD, price=63931.79, side=sell
+   Trade 9: product=BTC-USD, price=63931.79, side=sell
+   Trade 10: product=BTC-USD, price=63931.79, side=sell
+
+   Map phase: 1134 key-value pairs generated in 0.22s
+
+🔍 DEBUG - Sample mapped keys:
+   BTC-USD_count
+   BTC-USD_price_sum
+   BTC-USD_price_max
+   BTC-USD_price_min
+   BTC-USD_volume
+   BTC-USD_sell_count
+   BTC-USD_count
+   BTC-USD_price_sum
+   BTC-USD_price_max
+   BTC-USD_price_min
+   BTC-USD_volume
+   BTC-USD_sell_count
+   BTC-USD_count
+   BTC-USD_price_sum
+   BTC-USD_price_max
+   BTC-USD_price_min
+   BTC-USD_volume
+   BTC-USD_sell_count
+   BTC-USD_count
+   BTC-USD_price_sum
+
+   Reduce phase: 27 keys aggregated in 0.40s
+
+🔍 DEBUG - All price-related keys from reduce phase:
+   BTC-USD_price_max: 10487829.620000007
+   BTC-USD_price_min: 10487829.620000007
+   BTC-USD_price_sum: 10487829.620000007
+   DOGE-USD_price_max: 0.06925
+   DOGE-USD_price_min: 0.06925
+   DOGE-USD_price_sum: 0.06925
+   ETH-USD_price_max: 33386.45
+   ETH-USD_price_min: 33386.45
+   ETH-USD_price_sum: 33386.45
+   SOL-USD_price_max: 442.79
+   SOL-USD_price_min: 442.79
+   SOL-USD_price_sum: 442.79
+   🔍 DEBUG - price_max for BTC-USD: 10487829.620000007
+   🔍 DEBUG - price_max for SOL-USD: 442.79
+   🔍 DEBUG - price_sum for DOGE-USD: 0.06925
+   🔍 DEBUG - price_min for DOGE-USD: 0.06925
+   🔍 DEBUG - price_sum for BTC-USD: 10487829.620000007
+   🔍 DEBUG - price_min for BTC-USD: 10487829.620000007
+   🔍 DEBUG - price_sum for ETH-USD: 33386.45
+   🔍 DEBUG - price_max for ETH-USD: 33386.45
+   🔍 DEBUG - price_min for ETH-USD: 33386.45
+   🔍 DEBUG - price_sum for SOL-USD: 442.79
+   🔍 DEBUG - price_min for SOL-USD: 442.79
+   🔍 DEBUG - price_max for DOGE-USD: 0.06925
+
+🔍 DEBUG - Final product aggregations:
+   BTC-USD:
+      count: 164
+      price_sum: 10487829.620000007
+      price_max: 10487829.620000007
+      price_min: 10487829.620000007
+      volume: 0.13116028000000002
+      buy_count: 97
+      sell_count: 67
+   ETH-USD:
+      count: 18
+      price_sum: 33386.45
+      price_max: 33386.45
+      price_min: 33386.45
+      volume: 1.3267375000000001
+      buy_count: 6
+      sell_count: 12
+   SOL-USD:
+      count: 6
+      price_sum: 442.79
+      price_max: 442.79
+      price_min: 442.79
+      volume: 11.311551979999999
+      buy_count: 2
+      sell_count: 4
+   DOGE-USD:
+      count: 1
+      price_sum: 0.06925
+      price_max: 0.06925
+      price_min: 0.06925
+      volume: 22.7
+      buy_count: 0
+      sell_count: 1
+
+   ✅ FINAL: BTC-USD: 164 trades, avg $63950.18, Price Range: $10,487,829.62 - $10,487,829.62
+
+   ✅ FINAL: ETH-USD: 18 trades, avg $1854.80, Price Range: $33,386.45 - $33,386.45
+
+   ✅ FINAL: SOL-USD: 6 trades, avg $73.80, Price Range: $442.79 - $442.79
+
+   ✅ FINAL: DOGE-USD: 1 trades, avg $0.07, Price Range: $0.07 - $0.07
+  ✅ JSON saved to batch/batch_summary.json
+  ✅ CSV saved to S3
+
+✅ Generated 4 product summaries
+
+✅ Batch completed in 1.19s
+✅ Batch #5 completed successfully!
+
+⏳ Waiting 60 seconds until next batch...
+
+############################################################
+# BATCH RUN #6 (DEBUG MODE)
+############################################################
+
+============================================================
+🚀 [2026-07-25 06:42:38] Starting PySpark MapReduce Batch
+   (DEBUG MODE - Tracking min/max values)
+============================================================
+
+📥 [2026-07-25 06:42:38] Reading batched data from S3/raw_batch/...
+   Page 1: found 5 batch files (total: 5)
+
+✅ Total batch files: 5, Valid records: 226 (skipped 0 invalid)
+   Time: 0.21s
+
+📊 DEBUG - Min/Max from raw data (before MapReduce):
+   BTC-USD: min=$63,929.80, max=$63,961.99, count=186
+   ETH-USD: min=$1,854.26, max=$1,855.20, count=28
+   SOL-USD: min=$73.77, max=$73.84, count=11
+   DOGE-USD: min=$0.07, max=$0.07, count=1
+
+📊 Processing 226 valid trades using MapReduce...
+
+🔍 DEBUG - Sample trades from RDD:
+   Trade 1: product=BTC-USD, price=63929.8, side=sell
+   Trade 2: product=BTC-USD, price=63929.8, side=sell
+   Trade 3: product=BTC-USD, price=63929.8, side=sell
+   Trade 4: product=BTC-USD, price=63929.8, side=sell
+   Trade 5: product=BTC-USD, price=63931.79, side=sell
+   Trade 6: product=BTC-USD, price=63931.79, side=sell
+   Trade 7: product=BTC-USD, price=63931.79, side=sell
+   Trade 8: product=BTC-USD, price=63931.79, side=sell
+   Trade 9: product=BTC-USD, price=63931.79, side=sell
+   Trade 10: product=BTC-USD, price=63931.79, side=sell
+
+   Map phase: 1356 key-value pairs generated in 0.15s
+
+🔍 DEBUG - Sample mapped keys:
+   BTC-USD_count
+   BTC-USD_price_sum
+   BTC-USD_price_max
+   BTC-USD_price_min
+   BTC-USD_volume
+   BTC-USD_sell_count
+   BTC-USD_count
+   BTC-USD_price_sum
+   BTC-USD_price_max
+   BTC-USD_price_min
+   BTC-USD_volume
+   BTC-USD_sell_count
+   BTC-USD_count
+   BTC-USD_price_sum
+   BTC-USD_price_max
+   BTC-USD_price_min
+   BTC-USD_volume
+   BTC-USD_sell_count
+   BTC-USD_count
+   BTC-USD_price_sum
+
+   Reduce phase: 27 keys aggregated in 0.36s
+
+🔍 DEBUG - All price-related keys from reduce phase:
+   BTC-USD_price_max: 11894624.600000013
+   BTC-USD_price_min: 11894624.600000013
+   BTC-USD_price_sum: 11894624.600000013
+   DOGE-USD_price_max: 0.06925
+   DOGE-USD_price_min: 0.06925
+   DOGE-USD_price_sum: 0.06925
+   ETH-USD_price_max: 51931.649999999994
+   ETH-USD_price_min: 51931.649999999994
+   ETH-USD_price_sum: 51931.649999999994
+   SOL-USD_price_max: 811.87
+   SOL-USD_price_min: 811.87
+   SOL-USD_price_sum: 811.87
+   🔍 DEBUG - price_max for BTC-USD: 11894624.600000013
+   🔍 DEBUG - price_max for SOL-USD: 811.87
+   🔍 DEBUG - price_sum for DOGE-USD: 0.06925
+   🔍 DEBUG - price_min for DOGE-USD: 0.06925
+   🔍 DEBUG - price_sum for BTC-USD: 11894624.600000013
+   🔍 DEBUG - price_min for BTC-USD: 11894624.600000013
+   🔍 DEBUG - price_sum for ETH-USD: 51931.649999999994
+   🔍 DEBUG - price_max for ETH-USD: 51931.649999999994
+   🔍 DEBUG - price_min for ETH-USD: 51931.649999999994
+   🔍 DEBUG - price_sum for SOL-USD: 811.87
+   🔍 DEBUG - price_min for SOL-USD: 811.87
+   🔍 DEBUG - price_max for DOGE-USD: 0.06925
+
+🔍 DEBUG - Final product aggregations:
+   BTC-USD:
+      count: 186
+      price_sum: 11894624.600000013
+      price_max: 11894624.600000013
+      price_min: 11894624.600000013
+      volume: 0.13805365000000003
+      buy_count: 100
+      sell_count: 86
+   ETH-USD:
+      count: 28
+      price_sum: 51931.649999999994
+      price_max: 51931.649999999994
+      price_min: 51931.649999999994
+      volume: 1.89058183
+      buy_count: 8
+      sell_count: 20
+   SOL-USD:
+      count: 11
+      price_sum: 811.87
+      price_max: 811.87
+      price_min: 811.87
+      volume: 111.25260785
+      buy_count: 3
+      sell_count: 8
+   DOGE-USD:
+      count: 1
+      price_sum: 0.06925
+      price_max: 0.06925
+      price_min: 0.06925
+      volume: 22.7
+      buy_count: 0
+      sell_count: 1
+
+   ✅ FINAL: BTC-USD: 186 trades, avg $63949.59, Price Range: $11,894,624.60 - $11,894,624.60
+
+   ✅ FINAL: ETH-USD: 28 trades, avg $1854.70, Price Range: $51,931.65 - $51,931.65
+
+   ✅ FINAL: SOL-USD: 11 trades, avg $73.81, Price Range: $811.87 - $811.87
+
+   ✅ FINAL: DOGE-USD: 1 trades, avg $0.07, Price Range: $0.07 - $0.07
+  ✅ JSON saved to batch/batch_summary.json
+  ✅ CSV saved to S3
+
+✅ Generated 4 product summaries
+
+✅ Batch completed in 1.08s
+✅ Batch #6 completed successfully!
+
+⏳ Waiting 60 seconds until next batch...
+
+############################################################
+# BATCH RUN #7 (DEBUG MODE)
+############################################################
+
+============================================================
+🚀 [2026-07-25 06:43:40] Starting PySpark MapReduce Batch
+   (DEBUG MODE - Tracking min/max values)
+============================================================
+
+📥 [2026-07-25 06:43:40] Reading batched data from S3/raw_batch/...
+   Page 1: found 6 batch files (total: 6)
+
+✅ Total batch files: 6, Valid records: 273 (skipped 0 invalid)
+   Time: 0.22s
+
+📊 DEBUG - Min/Max from raw data (before MapReduce):
+   BTC-USD: min=$63,921.02, max=$63,961.99, count=226
+   ETH-USD: min=$1,853.77, max=$1,855.20, count=33
+   SOL-USD: min=$73.77, max=$73.84, count=13
+   DOGE-USD: min=$0.07, max=$0.07, count=1
+
+📊 Processing 273 valid trades using MapReduce...
+
+🔍 DEBUG - Sample trades from RDD:
+   Trade 1: product=BTC-USD, price=63929.8, side=sell
+   Trade 2: product=BTC-USD, price=63929.8, side=sell
+   Trade 3: product=BTC-USD, price=63929.8, side=sell
+   Trade 4: product=BTC-USD, price=63929.8, side=sell
+   Trade 5: product=BTC-USD, price=63931.79, side=sell
+   Trade 6: product=BTC-USD, price=63931.79, side=sell
+   Trade 7: product=BTC-USD, price=63931.79, side=sell
+   Trade 8: product=BTC-USD, price=63931.79, side=sell
+   Trade 9: product=BTC-USD, price=63931.79, side=sell
+   Trade 10: product=BTC-USD, price=63931.79, side=sell
+
+   Map phase: 1638 key-value pairs generated in 0.14s
+
+🔍 DEBUG - Sample mapped keys:
+   BTC-USD_count
+   BTC-USD_price_sum
+   BTC-USD_price_max
+   BTC-USD_price_min
+   BTC-USD_volume
+   BTC-USD_sell_count
+   BTC-USD_count
+   BTC-USD_price_sum
+   BTC-USD_price_max
+   BTC-USD_price_min
+   BTC-USD_volume
+   BTC-USD_sell_count
+   BTC-USD_count
+   BTC-USD_price_sum
+   BTC-USD_price_max
+   BTC-USD_price_min
+   BTC-USD_volume
+   BTC-USD_sell_count
+   BTC-USD_count
+   BTC-USD_price_sum
+
+   Reduce phase: 27 keys aggregated in 0.46s
+
+🔍 DEBUG - All price-related keys from reduce phase:
+   BTC-USD_price_max: 14451713.110000018
+   BTC-USD_price_min: 14451713.110000018
+   BTC-USD_price_sum: 14451713.110000018
+   DOGE-USD_price_max: 0.06925
+   DOGE-USD_price_min: 0.06925
+   DOGE-USD_price_sum: 0.06925
+   ETH-USD_price_max: 61201.54999999999
+   ETH-USD_price_min: 61201.54999999999
+   ETH-USD_price_sum: 61201.54999999999
+   SOL-USD_price_max: 959.4599999999999
+   SOL-USD_price_min: 959.4599999999999
+   SOL-USD_price_sum: 959.4599999999999
+   🔍 DEBUG - price_max for BTC-USD: 14451713.110000018
+   🔍 DEBUG - price_max for SOL-USD: 959.4599999999999
+   🔍 DEBUG - price_sum for DOGE-USD: 0.06925
+   🔍 DEBUG - price_min for DOGE-USD: 0.06925
+   🔍 DEBUG - price_sum for BTC-USD: 14451713.110000018
+   🔍 DEBUG - price_min for BTC-USD: 14451713.110000018
+   🔍 DEBUG - price_sum for ETH-USD: 61201.54999999999
+   🔍 DEBUG - price_max for ETH-USD: 61201.54999999999
+   🔍 DEBUG - price_min for ETH-USD: 61201.54999999999
+   🔍 DEBUG - price_sum for SOL-USD: 959.4599999999999
+   🔍 DEBUG - price_min for SOL-USD: 959.4599999999999
+   🔍 DEBUG - price_max for DOGE-USD: 0.06925
+
+🔍 DEBUG - Final product aggregations:
+   BTC-USD:
+      count: 226
+      price_sum: 14451713.110000018
+      price_max: 14451713.110000018
+      price_min: 14451713.110000018
+      volume: 0.17332083000000004
+      buy_count: 134
+      sell_count: 92
+   ETH-USD:
+      count: 33
+      price_sum: 61201.54999999999
+      price_max: 61201.54999999999
+      price_min: 61201.54999999999
+      volume: 1.9320004599999998
+      buy_count: 11
+      sell_count: 22
+   SOL-USD:
+      count: 13
+      price_sum: 959.4599999999999
+      price_max: 959.4599999999999
+      price_min: 959.4599999999999
+      volume: 124.49486395000001
+      buy_count: 3
+      sell_count: 10
+   DOGE-USD:
+      count: 1
+      price_sum: 0.06925
+      price_max: 0.06925
+      price_min: 0.06925
+      volume: 22.7
+      buy_count: 0
+      sell_count: 1
+
+   ✅ FINAL: BTC-USD: 226 trades, avg $63945.63, Price Range: $14,451,713.11 - $14,451,713.11
+
+   ✅ FINAL: ETH-USD: 33 trades, avg $1854.59, Price Range: $61,201.55 - $61,201.55
+
+   ✅ FINAL: SOL-USD: 13 trades, avg $73.80, Price Range: $959.46 - $959.46
+
+   ✅ FINAL: DOGE-USD: 1 trades, avg $0.07, Price Range: $0.07 - $0.07
+  ✅ JSON saved to batch/batch_summary.json
+  ✅ CSV saved to S3
+
+✅ Generated 4 product summaries
+
+✅ Batch completed in 1.23s
+✅ Batch #7 completed successfully!
+
+⏳ Waiting 60 seconds until next batch...
+
+############################################################
+# BATCH RUN #8 (DEBUG MODE)
+############################################################
+
+============================================================
+🚀 [2026-07-25 06:44:41] Starting PySpark MapReduce Batch
+   (DEBUG MODE - Tracking min/max values)
+============================================================
+
+📥 [2026-07-25 06:44:41] Reading batched data from S3/raw_batch/...
+   Page 1: found 7 batch files (total: 7)
+
+✅ Total batch files: 7, Valid records: 325 (skipped 0 invalid)
+   Time: 0.29s
+
+📊 DEBUG - Min/Max from raw data (before MapReduce):
+   BTC-USD: min=$63,921.02, max=$63,961.99, count=271
+   ETH-USD: min=$1,853.77, max=$1,855.20, count=37
+   SOL-USD: min=$73.77, max=$73.84, count=15
+   DOGE-USD: min=$0.07, max=$0.07, count=2
+
+📊 Processing 325 valid trades using MapReduce...
+
+🔍 DEBUG - Sample trades from RDD:
+   Trade 1: product=BTC-USD, price=63929.8, side=sell
+   Trade 2: product=BTC-USD, price=63929.8, side=sell
+   Trade 3: product=BTC-USD, price=63929.8, side=sell
+   Trade 4: product=BTC-USD, price=63929.8, side=sell
+   Trade 5: product=BTC-USD, price=63931.79, side=sell
+   Trade 6: product=BTC-USD, price=63931.79, side=sell
+   Trade 7: product=BTC-USD, price=63931.79, side=sell
+   Trade 8: product=BTC-USD, price=63931.79, side=sell
+   Trade 9: product=BTC-USD, price=63931.79, side=sell
+   Trade 10: product=BTC-USD, price=63931.79, side=sell
+
+   Map phase: 1950 key-value pairs generated in 0.16s
+
+🔍 DEBUG - Sample mapped keys:
+   BTC-USD_count
+   BTC-USD_price_sum
+   BTC-USD_price_max
+   BTC-USD_price_min
+   BTC-USD_volume
+   BTC-USD_sell_count
+   BTC-USD_count
+   BTC-USD_price_sum
+   BTC-USD_price_max
+   BTC-USD_price_min
+   BTC-USD_volume
+   BTC-USD_sell_count
+   BTC-USD_count
+   BTC-USD_price_sum
+   BTC-USD_price_max
+   BTC-USD_price_min
+   BTC-USD_volume
+   BTC-USD_sell_count
+   BTC-USD_count
+   BTC-USD_price_sum
+
+   Reduce phase: 27 keys aggregated in 0.34s
+
+🔍 DEBUG - All price-related keys from reduce phase:
+   BTC-USD_price_max: 17328401.27000003
+   BTC-USD_price_min: 17328401.27000003
+   BTC-USD_price_sum: 17328401.27000003
+   DOGE-USD_price_max: 0.1385
+   DOGE-USD_price_min: 0.1385
+   DOGE-USD_price_sum: 0.1385
+   ETH-USD_price_max: 68616.87
+   ETH-USD_price_min: 68616.87
+   ETH-USD_price_sum: 68616.87
+   SOL-USD_price_max: 1107.05
+   SOL-USD_price_min: 1107.05
+   SOL-USD_price_sum: 1107.05
+   🔍 DEBUG - price_max for BTC-USD: 17328401.27000003
+   🔍 DEBUG - price_max for SOL-USD: 1107.05
+   🔍 DEBUG - price_sum for DOGE-USD: 0.1385
+   🔍 DEBUG - price_min for DOGE-USD: 0.1385
+   🔍 DEBUG - price_sum for BTC-USD: 17328401.27000003
+   🔍 DEBUG - price_min for BTC-USD: 17328401.27000003
+   🔍 DEBUG - price_sum for ETH-USD: 68616.87
+   🔍 DEBUG - price_max for ETH-USD: 68616.87
+   🔍 DEBUG - price_min for ETH-USD: 68616.87
+   🔍 DEBUG - price_sum for SOL-USD: 1107.05
+   🔍 DEBUG - price_min for SOL-USD: 1107.05
+   🔍 DEBUG - price_max for DOGE-USD: 0.1385
+
+🔍 DEBUG - Final product aggregations:
+   BTC-USD:
+      count: 271
+      price_sum: 17328401.27000003
+      price_max: 17328401.27000003
+      price_min: 17328401.27000003
+      volume: 0.17745003000000004
+      buy_count: 169
+      sell_count: 102
+   ETH-USD:
+      count: 37
+      price_sum: 68616.87
+      price_max: 68616.87
+      price_min: 68616.87
+      volume: 1.97554789
+      buy_count: 11
+      sell_count: 26
+   SOL-USD:
+      count: 15
+      price_sum: 1107.05
+      price_max: 1107.05
+      price_min: 1107.05
+      volume: 129.07269157000002
+      buy_count: 3
+      sell_count: 12
+   DOGE-USD:
+      count: 2
+      price_sum: 0.1385
+      price_max: 0.1385
+      price_min: 0.1385
+      volume: 159.6
+      buy_count: 0
+      sell_count: 2
+
+   ✅ FINAL: BTC-USD: 271 trades, avg $63942.44, Price Range: $17,328,401.27 - $17,328,401.27
+
+   ✅ FINAL: ETH-USD: 37 trades, avg $1854.51, Price Range: $68,616.87 - $68,616.87
+
+   ✅ FINAL: SOL-USD: 15 trades, avg $73.80, Price Range: $1,107.05 - $1,107.05
+
+   ✅ FINAL: DOGE-USD: 2 trades, avg $0.07, Price Range: $0.14 - $0.14
+  ✅ JSON saved to batch/batch_summary.json
+  ✅ CSV saved to S3
+
+✅ Generated 4 product summaries
+
+✅ Batch completed in 0.94s
+✅ Batch #8 completed successfully!
+
+⏳ Waiting 60 seconds until next batch...
+
+############################################################
+# BATCH RUN #9 (DEBUG MODE)
+############################################################
+
+============================================================
+🚀 [2026-07-25 06:45:43] Starting PySpark MapReduce Batch
+   (DEBUG MODE - Tracking min/max values)
+============================================================
+
+📥 [2026-07-25 06:45:43] Reading batched data from S3/raw_batch/...
+   Page 1: found 8 batch files (total: 8)
+
+✅ Total batch files: 8, Valid records: 375 (skipped 0 invalid)
+   Time: 0.29s
+
+📊 DEBUG - Min/Max from raw data (before MapReduce):
+   BTC-USD: min=$63,921.02, max=$63,961.99, count=313
+   ETH-USD: min=$1,853.77, max=$1,855.20, count=40
+   SOL-USD: min=$73.77, max=$73.84, count=20
+   DOGE-USD: min=$0.07, max=$0.07, count=2
+
+📊 Processing 375 valid trades using MapReduce...
+
+🔍 DEBUG - Sample trades from RDD:
+   Trade 1: product=BTC-USD, price=63929.8, side=sell
+   Trade 2: product=BTC-USD, price=63929.8, side=sell
+   Trade 3: product=BTC-USD, price=63929.8, side=sell
+   Trade 4: product=BTC-USD, price=63929.8, side=sell
+   Trade 5: product=BTC-USD, price=63931.79, side=sell
+   Trade 6: product=BTC-USD, price=63931.79, side=sell
+   Trade 7: product=BTC-USD, price=63931.79, side=sell
+   Trade 8: product=BTC-USD, price=63931.79, side=sell
+   Trade 9: product=BTC-USD, price=63931.79, side=sell
+   Trade 10: product=BTC-USD, price=63931.79, side=sell
+
+   Map phase: 2250 key-value pairs generated in 0.14s
+
+🔍 DEBUG - Sample mapped keys:
+   BTC-USD_count
+   BTC-USD_price_sum
+   BTC-USD_price_max
+   BTC-USD_price_min
+   BTC-USD_volume
+   BTC-USD_sell_count
+   BTC-USD_count
+   BTC-USD_price_sum
+   BTC-USD_price_max
+   BTC-USD_price_min
+   BTC-USD_volume
+   BTC-USD_sell_count
+   BTC-USD_count
+   BTC-USD_price_sum
+   BTC-USD_price_max
+   BTC-USD_price_min
+   BTC-USD_volume
+   BTC-USD_sell_count
+   BTC-USD_count
+   BTC-USD_price_sum
+
+   Reduce phase: 27 keys aggregated in 0.35s
+
+🔍 DEBUG - All price-related keys from reduce phase:
+   BTC-USD_price_max: 20013567.22000003
+   BTC-USD_price_min: 20013567.22000003
+   BTC-USD_price_sum: 20013567.22000003
+   DOGE-USD_price_max: 0.1385
+   DOGE-USD_price_min: 0.1385
+   DOGE-USD_price_sum: 0.1385
+   ETH-USD_price_max: 74178.79
+   ETH-USD_price_min: 74178.79
+   ETH-USD_price_sum: 74178.79
+   SOL-USD_price_max: 1476.0999999999997
+   SOL-USD_price_min: 1476.0999999999997
+   SOL-USD_price_sum: 1476.0999999999997
