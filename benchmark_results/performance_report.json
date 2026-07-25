@@ -1,0 +1,106 @@
+{
+  "timestamp": "2026-07-24T12:43:42.292821+00:00",
+  "throughput": [
+    {
+      "timestamp": "2026-07-24 12:38",
+      "trades_per_minute": 1,
+      "avg_price": 64950.48,
+      "volume": 0.00291968
+    },
+    {
+      "timestamp": "2026-07-24 12:39",
+      "trades_per_minute": 53,
+      "avg_price": 57723.19150943395,
+      "volume": 1.0501832599999998
+    },
+    {
+      "timestamp": "2026-07-24 12:40",
+      "trades_per_minute": 50,
+      "avg_price": 58615.16219999999,
+      "volume": 0.7135319599999999
+    },
+    {
+      "timestamp": "2026-07-24 12:41",
+      "trades_per_minute": 51,
+      "avg_price": 54983.362537254914,
+      "volume": 23.732924910000005
+    },
+    {
+      "timestamp": "2026-07-24 12:42",
+      "trades_per_minute": 51,
+      "avg_price": 41358.18509803923,
+      "volume": 5.3310308599999985
+    },
+    {
+      "timestamp": "2026-07-24 12:43",
+      "trades_per_minute": 16,
+      "avg_price": 57017.447500000024,
+      "volume": 0.83889023
+    }
+  ],
+  "latency": [
+    {
+      "rate": 10,
+      "avg_latency": 535.6563524933921,
+      "p95_latency": 803.4845287400881,
+      "p99_latency": 1071.3127049867842
+    },
+    {
+      "rate": 50,
+      "avg_latency": 569.3984849339207,
+      "p95_latency": 854.097727400881,
+      "p99_latency": 1138.7969698678414
+    },
+    {
+      "rate": 100,
+      "avg_latency": 611.5761504845816,
+      "p95_latency": 917.3642257268724,
+      "p99_latency": 1223.1523009691632
+    },
+    {
+      "rate": 200,
+      "avg_latency": 695.9314815859032,
+      "p95_latency": 1043.8972223788546,
+      "p99_latency": 1391.8629631718063
+    },
+    {
+      "rate": 500,
+      "avg_latency": 948.9974748898679,
+      "p95_latency": 1423.4962123348018,
+      "p99_latency": 1897.9949497797359
+    }
+  ],
+  "speedup": [
+    {
+      "workers": 1,
+      "speedup": 1.0,
+      "efficiency": 100.0,
+      "processing_time_ms": 0.21
+    },
+    {
+      "workers": 2,
+      "speedup": 0.32,
+      "efficiency": 15.8,
+      "processing_time_ms": 0.65
+    },
+    {
+      "workers": 4,
+      "speedup": 0.33,
+      "efficiency": 8.2,
+      "processing_time_ms": 0.63
+    },
+    {
+      "workers": 8,
+      "speedup": 0.23,
+      "efficiency": 2.9,
+      "processing_time_ms": 0.88
+    }
+  ],
+  "summary": {
+    "total_trades": 222.0,
+    "peak_throughput": 53,
+    "avg_latency": 672.3119888775332,
+    "best_speedup": 1.0,
+    "best_efficiency": 100.0
+  }
+}

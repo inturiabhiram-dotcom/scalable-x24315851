@@ -1,0 +1,496 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Scalable Cloud Analytics - Lambda Architecture</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background: #0a0e27; color: #fff; padding: 20px; }
+        .header { background: linear-gradient(135deg, #1a1a4e, #2d1b69); padding: 20px; border-radius: 10px; margin-bottom: 20px; }
+        .header h1 { font-size: 28px; background: linear-gradient(90deg, #00d4ff, #7b2ffc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .header small { color: #8892b0; display: block; margin-top: 5px; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+        .card { background: #14183a; border-radius: 10px; padding: 20px; border: 1px solid #2d3566; }
+        .card h3 { color: #00d4ff; margin-bottom: 15px; font-size: 16px; text-transform: uppercase; letter-spacing: 1px; }
+        .metric { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #1a1f4e; }
+        .metric:last-child { border-bottom: none; }
+        .metric .label { color: #8892b0; }
+        .metric .value { color: #64ffda; font-weight: bold; }
+        .value.highlight { color: #ffd700; }
+        .full { grid-column: 1 / -1; }
+        .window-item { background: #1a1f4e; padding: 12px; border-radius: 8px; margin-bottom: 10px; }
+        .window-item .row { display: flex; justify-content: space-between; font-size: 14px; }
+        .window-item .row .label { color: #8892b0; }
+        .window-item .row .value { color: #64ffda; }
+        .btn { background: linear-gradient(90deg, #00d4ff, #7b2ffc); border: none; color: #fff; padding: 10px 30px; border-radius: 25px; cursor: pointer; font-size: 14px; transition: opacity 0.3s; }
+        .btn:hover { opacity: 0.8; }
+        .btn-secondary { background: #2d3566; }
+        .live-indicator { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #00ff00; animation: pulse 1s infinite; margin-right: 10px; }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+        .status-text { color: #64ffda; margin-left: 20px; }
+        .status-text.error { color: #ff6b6b; }
+        .status-text.loading { color: #ffd700; }
+        .chart-container { position: relative; height: 250px; margin-top: 10px; }
+        .benchmark-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-top: 10px; }
+        .benchmark-card { background: #1a1f4e; border-radius: 10px; padding: 15px; border: 1px solid #2d3566; text-align: center; }
+        .benchmark-card .value { font-size: 28px; font-weight: bold; }
+        .benchmark-card .label { color: #8892b0; font-size: 12px; text-transform: uppercase; }
+        .benchmark-card .sub { color: #8892b0; font-size: 12px; margin-top: 5px; }
+        @media (max-width: 768px) {
+            .grid { grid-template-columns: 1fr; }
+            .benchmark-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🚀 Scalable Cloud Analytics Pipeline</h1>
+        <small>Lambda Architecture • Real-Time Cryptocurrency Analytics</small>
+        <div style="margin-top: 10px;">
+            <span class="live-indicator"></span>
+            <span style="color: #64ffda;">LIVE DATA</span>
+            <span class="status-text" id="status-text">Connecting...</span>
+        </div>
+    </div>
+
+    <div style="margin-bottom: 20px;">
+        <button class="btn" onclick="refreshData()">🔄 Refresh</button>
+        <button class="btn btn-secondary" onclick="runBenchmark()" style="margin-left: 10px;">⚡ Run Benchmark</button>
+    </div>
+
+    <div id="dashboard">
+        <div class="grid">
+            <div class="card">
+                <h3>📊 Speed Layer (Last 5 Minutes)</h3>
+                <div id="speed-data">
+                    <div class="metric"><span class="label">Trades</span><span class="value" id="speed-trades">0</span></div>
+                    <div class="metric"><span class="label">Avg Price</span><span class="value" id="speed-price">$0.00</span></div>
+                    <div class="metric"><span class="label">Volume</span><span class="value" id="speed-volume">0</span></div>
+                    <div class="metric"><span class="label">Avg Latency</span><span class="value" id="speed-latency">0ms</span></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>📈 Batch Layer (Full History)</h3>
+                <div id="batch-data">
+                    <div class="metric"><span class="label">Total Trades</span><span class="value" id="batch-trades">0</span></div>
+                    <div class="metric"><span class="label">Avg Price</span><span class="value" id="batch-price">$0.00</span></div>
+                    <div class="metric"><span class="label">Volume</span><span class="value" id="batch-volume">0</span></div>
+                    <div class="metric"><span class="label">Buys / Sells</span><span class="value" id="batch-sides">0 / 0</span></div>
+                    <div class="metric"><span class="label">Price Range</span><span class="value" id="batch-range">$0 - $0</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Real-Time Graphs -->
+        <div class="card full">
+            <h3>📈 Real-Time Performance Graphs</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div>
+                    <h4 style="color: #8892b0; font-size: 12px; text-transform: uppercase; margin-bottom: 10px;">Trade Count (Last 20 Minutes)</h4>
+                    <div class="chart-container">
+                        <canvas id="tradeChart"></canvas>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="color: #8892b0; font-size: 12px; text-transform: uppercase; margin-bottom: 10px;">Avg Price (Last 20 Minutes)</h4>
+                    <div class="chart-container">
+                        <canvas id="priceChart"></canvas>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="color: #8892b0; font-size: 12px; text-transform: uppercase; margin-bottom: 10px;">Volume (Last 20 Minutes)</h4>
+                    <div class="chart-container">
+                        <canvas id="volumeChart"></canvas>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="color: #8892b0; font-size: 12px; text-transform: uppercase; margin-bottom: 10px;">Sliding Windows (Trade Count)</h4>
+                    <div class="chart-container">
+                        <canvas id="windowChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card full">
+            <h3>🔄 Sliding Window Metrics (Last 5 Windows)</h3>
+            <div id="window-data">
+                <div style="color: #8892b0; text-align: center; padding: 20px;">Loading...</div>
+            </div>
+        </div>
+
+        <div class="card full" id="benchmark-section">
+            <h3>⚡ Performance Benchmark</h3>
+            <div id="benchmark-data">
+                <div style="color: #8892b0; text-align: center; padding: 20px;">Click "Run Benchmark" to test performance</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="refresh" style="text-align: center; margin-top: 20px; color: #8892b0;">
+        Last updated: <span id="last-update">---</span>
+    </div>
+
+    <script>
+        let tradeChart, priceChart, volumeChart, windowChart;
+        let updateCount = 0;
+
+        // Initialize charts
+        function initCharts() {
+            const chartOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: '#8892b0'
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        ticks: {
+                            color: '#8892b0',
+                            maxTicksLimit: 10
+                        },
+                        grid: {
+                            color: '#1a1f4e'
+                        }
+                    },
+                    y: {
+                        ticks: {
+                            color: '#8892b0'
+                        },
+                        grid: {
+                            color: '#1a1f4e'
+                        }
+                    }
+                }
+            };
+
+            // Trade Count Chart
+            const ctx1 = document.getElementById('tradeChart').getContext('2d');
+            tradeChart = new Chart(ctx1, {
+                type: 'bar',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: 'Trades per Minute',
+                        data: [],
+                        backgroundColor: 'rgba(0, 212, 255, 0.5)',
+                        borderColor: '#00d4ff',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    ...chartOptions,
+                    plugins: {
+                        ...chartOptions.plugins,
+                        legend: {
+                            labels: {
+                                color: '#8892b0'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Price Chart
+            const ctx2 = document.getElementById('priceChart').getContext('2d');
+            priceChart = new Chart(ctx2, {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: 'Avg Price',
+                        data: [],
+                        borderColor: '#64ffda',
+                        backgroundColor: 'rgba(100, 255, 218, 0.1)',
+                        fill: true,
+                        tension: 0.4,
+                        pointBackgroundColor: '#64ffda',
+                        pointRadius: 3
+                    }]
+                },
+                options: {
+                    ...chartOptions,
+                    plugins: {
+                        ...chartOptions.plugins,
+                        legend: {
+                            labels: {
+                                color: '#8892b0'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Volume Chart
+            const ctx3 = document.getElementById('volumeChart').getContext('2d');
+            volumeChart = new Chart(ctx3, {
+                type: 'bar',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: 'Volume',
+                        data: [],
+                        backgroundColor: 'rgba(255, 215, 0, 0.5)',
+                        borderColor: '#ffd700',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    ...chartOptions,
+                    plugins: {
+                        ...chartOptions.plugins,
+                        legend: {
+                            labels: {
+                                color: '#8892b0'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Window Chart
+            const ctx4 = document.getElementById('windowChart').getContext('2d');
+            windowChart = new Chart(ctx4, {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: 'Window Trade Count',
+                        data: [],
+                        borderColor: '#7b2ffc',
+                        backgroundColor: 'rgba(123, 47, 252, 0.1)',
+                        fill: true,
+                        tension: 0.4,
+                        pointBackgroundColor: '#7b2ffc',
+                        pointRadius: 3
+                    }]
+                },
+                options: {
+                    ...chartOptions,
+                    plugins: {
+                        ...chartOptions.plugins,
+                        legend: {
+                            labels: {
+                                color: '#8892b0'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function safeNumber(value, defaultValue = 0) {
+            const num = parseFloat(value);
+            return isNaN(num) ? defaultValue : num;
+        }
+
+        function formatCurrency(value) {
+            return '$' + safeNumber(value).toFixed(2);
+        }
+
+        function formatVolume(value) {
+            return safeNumber(value).toFixed(4);
+        }
+
+        async function fetchData() {
+            const statusEl = document.getElementById('status-text');
+            const updateEl = document.getElementById('last-update');
+            
+            try {
+                updateCount++;
+                statusEl.textContent = 'Loading...';
+                statusEl.className = 'status-text loading';
+                
+                // Fetch merged data
+                const response = await fetch('/api/merged?product=BTC-USD');
+                const data = await response.json();
+                
+                if (data.error) {
+                    statusEl.textContent = '⚠️ Error: ' + data.error;
+                    statusEl.className = 'status-text error';
+                    return;
+                }
+
+                // Update Speed Layer
+                if (data.speed_layer) {
+                    document.getElementById('speed-trades').textContent = safeNumber(data.speed_layer.trades);
+                    document.getElementById('speed-price').textContent = formatCurrency(data.speed_layer.avg_price);
+                    document.getElementById('speed-volume').textContent = formatVolume(data.speed_layer.volume);
+                    document.getElementById('speed-latency').textContent = safeNumber(data.speed_layer.avg_latency) + 'ms';
+                }
+
+                // Update Batch Layer
+                if (data.batch_layer) {
+                    const buys = safeNumber(data.batch_layer.buys);
+                    const sells = safeNumber(data.batch_layer.sells);
+                    document.getElementById('batch-trades').textContent = safeNumber(data.batch_layer.trades);
+                    document.getElementById('batch-price').textContent = formatCurrency(data.batch_layer.avg_price);
+                    document.getElementById('batch-volume').textContent = formatVolume(data.batch_layer.volume);
+                    document.getElementById('batch-sides').textContent = buys + ' / ' + sells;
+                    document.getElementById('batch-range').textContent = formatCurrency(data.batch_layer.min_price) + ' - ' + formatCurrency(data.batch_layer.max_price);
+                }
+
+                // Update Windows
+                const windowContainer = document.getElementById('window-data');
+                if (data.window_metrics && data.window_metrics.length > 0) {
+                    windowContainer.innerHTML = '';
+                    data.window_metrics.forEach(w => {
+                        const div = document.createElement('div');
+                        div.className = 'window-item';
+                        const startTime = new Date(w.window_start).toLocaleTimeString();
+                        div.innerHTML = `
+                            <div class="row">
+                                <span class="label">${startTime}</span>
+                                <span class="value">${safeNumber(w.trade_count)} trades | ${formatCurrency(w.avg_price)}</span>
+                            </div>
+                            <div class="row" style="font-size: 12px; margin-top: 4px;">
+                                <span class="label">Volume: ${formatVolume(w.total_volume)}</span>
+                                <span class="label">Buy: ${safeNumber(w.buy_count)} | Sell: ${safeNumber(w.sell_count)}</span>
+                                <span class="label">Range: ${formatCurrency(w.min_price)} - ${formatCurrency(w.max_price)}</span>
+                            </div>
+                        `;
+                        windowContainer.appendChild(div);
+                    });
+                } else {
+                    windowContainer.innerHTML = '<div style="color: #8892b0; text-align: center; padding: 20px;">No window data available yet</div>';
+                }
+
+                updateEl.textContent = new Date().toLocaleString();
+                statusEl.textContent = '✅ Updated #' + updateCount;
+                statusEl.className = 'status-text';
+                
+                // Update charts
+                await updateCharts();
+                
+            } catch (error) {
+                console.error('Fetch error:', error);
+                statusEl.textContent = '⚠️ Connection error';
+                statusEl.className = 'status-text error';
+            }
+        }
+
+        async function updateCharts() {
+            try {
+                // Fetch speed history
+                const speedResponse = await fetch('/api/speed_history');
+                const speedData = await speedResponse.json();
+                
+                if (speedData.timestamps && speedData.timestamps.length > 0) {
+                    // Update Trade Chart
+                    tradeChart.data.labels = speedData.timestamps;
+                    tradeChart.data.datasets[0].data = speedData.trades;
+                    tradeChart.update();
+                    
+                    // Update Price Chart
+                    priceChart.data.labels = speedData.timestamps;
+                    priceChart.data.datasets[0].data = speedData.prices;
+                    priceChart.update();
+                    
+                    // Update Volume Chart
+                    volumeChart.data.labels = speedData.timestamps;
+                    volumeChart.data.datasets[0].data = speedData.volumes;
+                    volumeChart.update();
+                }
+                
+                // Fetch window history
+                const windowResponse = await fetch('/api/window_history');
+                const windowData = await windowResponse.json();
+                
+                if (windowData.timestamps && windowData.timestamps.length > 0) {
+                    windowChart.data.labels = windowData.timestamps;
+                    windowChart.data.datasets[0].data = windowData.trade_counts;
+                    windowChart.update();
+                }
+                
+            } catch (error) {
+                console.error('Chart update error:', error);
+            }
+        }
+
+        async function runBenchmark() {
+            const container = document.getElementById('benchmark-data');
+            container.innerHTML = '<div style="text-align: center; padding: 20px;">⏳ Running benchmark...</div>';
+            
+            try {
+                const response = await fetch('/api/benchmark');
+                const data = await response.json();
+                
+                if (data.error) {
+                    container.innerHTML = `<div style="color: #ff6b6b; text-align: center; padding: 20px;">❌ Error: ${data.error}</div>`;
+                    return;
+                }
+
+                const seqTime = safeNumber(data.sequential?.time_ms);
+                const seqRecords = safeNumber(data.sequential?.records);
+                
+                let bestPar = null;
+                if (data.parallel) {
+                    for (const [key, value] of Object.entries(data.parallel)) {
+                        if (!bestPar || safeNumber(value.time_ms) < safeNumber(bestPar.time_ms)) {
+                            bestPar = { 
+                                ...value, 
+                                threads: value.threads || key.split('_')[0],
+                                time_ms: safeNumber(value.time_ms),
+                                success_rate: value.success_rate || '0/0'
+                            };
+                        }
+                    }
+                }
+                
+                const speedup = safeNumber(data.speedup);
+                const speedupColor = speedup > 3 ? '#64ffda' : speedup > 1.5 ? '#ffd700' : '#ff6b6b';
+                
+                let html = `<div class="benchmark-grid">`;
+                html += `
+                    <div class="benchmark-card">
+                        <div class="label">Sequential</div>
+                        <div class="value" style="color: #64ffda;">${seqTime}ms</div>
+                        <div class="sub">${seqRecords} records</div>
+                    </div>
+                `;
+                if (bestPar) {
+                    html += `
+                        <div class="benchmark-card" style="border-color: #00d4ff44;">
+                            <div class="label">Parallel (${bestPar.threads} threads)</div>
+                            <div class="value" style="color: #00d4ff;">${bestPar.time_ms}ms</div>
+                            <div class="sub">Success: ${bestPar.success_rate}</div>
+                        </div>
+                    `;
+                }
+                html += `
+                    <div class="benchmark-card">
+                        <div class="label">Speedup</div>
+                        <div class="value" style="color: ${speedupColor};">${speedup}x</div>
+                        <div class="sub">${seqTime}ms → ${bestPar ? bestPar.time_ms : '--'}ms</div>
+                    </div>
+                `;
+                html += '</div>';
+                html += `<div style="color: #8892b0; font-size: 12px; text-align: center; margin-top: 10px;">Benchmark completed at ${new Date(data.timestamp).toLocaleString()}</div>`;
+                
+                container.innerHTML = html;
+            } catch (error) {
+                container.innerHTML = `<div style="color: #ff6b6b; text-align: center; padding: 20px;">❌ Error running benchmark</div>`;
+            }
+        }
+
+        async function refreshData() {
+            await fetchData();
+        }
+
+        // Initialize and start
+        document.addEventListener('DOMContentLoaded', function() {
+            initCharts();
+            fetchData();
+            setInterval(fetchData, 5000);
+        });
+    </script>
+</body>
+</html>

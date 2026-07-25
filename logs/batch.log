@@ -1,0 +1,48 @@
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+26/07/24 13:54:34 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+/home/ec2-user/venv/lib64/python3.9/site-packages/boto3/compat.py:89: PythonDeprecationWarning: Boto3 will no longer support Python 3.9 starting April 29, 2026. To continue receiving service updates, bug fixes, and security updates please upgrade to Python 3.10 or later. More information can be found here: https://aws.amazon.com/blogs/developer/python-support-policy-updates-for-aws-sdks-and-tools/
+  warnings.warn(warning, PythonDeprecationWarning)
+[Stage 0:>                                                          (0 + 1) / 1][Stage 0:===========================================================(1 + 0) / 1]                                                                                📋 Batch Configuration:
+   Interval: 1 minutes
+   Source: S3/raw_batch/ (batched files - 100 records each)
+
+============================================================
+🚀 [2026-07-24 13:54:36] Starting PySpark MapReduce Batch
+   (Reading batched data from S3/raw_batch/)
+============================================================
+
+📥 [2026-07-24 13:54:36] Reading batched data from S3/raw_batch/...
+   Page 1: found 1 batch files (total: 1)
+✅ Total batch files: 1, Valid records: 54 (skipped 0 invalid) in 0.12s
+   Sample valid trade: {
+  "time": "2026-07-24T13:51:50.619119Z",
+  "product": "BTC-USD",
+  "price": 64061.98,
+  "size": 0.03035733,
+  "side": "sell",
+  "trade_id": 1061648249,
+  "received_at": "2026-07-24T13:51:50.624281+00:00"
+}
+
+📊 Processing 54 valid trades using MapReduce...
+   Map phase: 324 key-value pairs generated in 0.22s
+   Reduce phase: 20 keys aggregated in 0.89s
+   BTC-USD: 25 trades, avg $64037.84, Buys: 7, Sells: 18
+   ETH-USD: 28 trades, avg $1852.72, Buys: 18, Sells: 10
+   SOL-USD: 1 trades, avg $74.19, Buys: 0, Sells: 1
+  ✅ JSON saved to batch/batch_mapreduce.json
+  ✅ Updated batch/batch_summary.json
+  ✅ CSV saved to S3
+
+✅ Generated 3 product summaries
+
+============================================================
+✅ [2026-07-24 13:54:40] Batch Processing Complete!
+   Products: 3
+   Total Valid Trades: 54
+   Total Time: 1.45s
+============================================================
+✅ PySpark stopped
+
+✅ Batch completed successfully! Processed 3 products.
