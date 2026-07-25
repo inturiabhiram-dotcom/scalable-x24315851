@@ -1,4 +1,6 @@
 
+ #user_data_github.sh
+
 #!/bin/bash
 # ============================================
 # Scalable Cloud Analytics - EC2 Launch Script

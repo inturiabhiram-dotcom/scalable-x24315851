@@ -1,5 +1,5 @@
 
-# update_launch_template_full.py - Update launch template to t3.small with PySpark
+# update_launch_template_github.py - Update launch template to t3.small with PySpark
 import boto3
 import base64
 import sys
