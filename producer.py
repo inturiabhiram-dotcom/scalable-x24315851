@@ -108,7 +108,7 @@ def on_close(ws, close_status_code, close_msg):
 # Schedule periodic flush every 60 seconds (in case buffer doesn't fill)
 def periodic_flush():
     while True:
-        time.sleep(60)
+        time.sleep(10)
         flush_buffer()
 
 # Start periodic flush thread
