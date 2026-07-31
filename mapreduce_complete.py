@@ -10,9 +10,9 @@ import sys
 class PySparkBatchProcessor:
     def __init__(self):
         self.spark = SparkSession.builder \
-            .appName("ScalableCloudAnalytics") \
+            .appName("Scalable-Cloud-Analytics") \
             .config("spark.master", "local[*]") \
-            .config("spark.executor.memory", "2g") \
+            .config("spark.executor.memory", "6g") \
             .config("spark.driver.memory", "2g") \
             .config("spark.sql.shuffle.partitions", "8") \
             .getOrCreate()
