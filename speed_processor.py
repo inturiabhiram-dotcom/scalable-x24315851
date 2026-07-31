@@ -159,7 +159,7 @@ class SpeedProcessor:
 
             iterator = response["NextShardIterator"]
 
-            time.sleep(1)
+            time.sleep(10)
 
     def consume_kinesis(self):
 
