@@ -9,7 +9,7 @@ import threading
 STREAM_NAME = "x24315851-kinesis-stream"
 S3_BUCKET = "x24315851-scalable-s3"
 REGION = "us-east-1"
-BATCH_SIZE = 300  # Number of records per batch file
+BATCH_SIZE = 100  # Number of records per batch file
 
 kinesis = boto3.client("kinesis", region_name=REGION)
 s3 = boto3.client("s3", region_name=REGION)
