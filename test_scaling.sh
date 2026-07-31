@@ -12,7 +12,7 @@ aws autoscaling describe-auto-scaling-groups \
 echo "Scaling up to 2 instances..."
 aws autoscaling set-desired-capacity \
     --auto-scaling-group-name scalable-autoscaling \
-    --desired-capacity 2
+    --desired-capacity 1
 
 sleep 30
 
