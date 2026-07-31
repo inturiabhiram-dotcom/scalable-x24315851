@@ -30,7 +30,7 @@ def flush_buffer():
         
         # Create a batch file with timestamp
         timestamp = datetime.now(timezone.utc).strftime('%Y%m%d_%H%M%S')
-        batch_key = f"raw_batch/batch_{timestamp}_{len(trade_buffer)}.json"
+        batch_key = f"raw_batch/batch_{timestamp}_{len(trade-buf)}.json"
         
         # Write all trades as a JSON array
         s3.put_object(
@@ -108,11 +108,11 @@ def on_close(ws, close_status_code, close_msg):
 # Schedule periodic flush every 60 seconds (in case buffer doesn't fill)
 def periodic_flush():
     while True:
-        time.sleep(10)
+        time.sleep(60)
         flush_buffer()
 
 # Start periodic flush thread
-flush_thread = threading.Thread(target=periodic_flush, daemon=True)
+flush_thread = threading.Thread(target=periodic_flush, daemon=false)
 flush_thread.start()
 
 ws = WebSocketApp(
