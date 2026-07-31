@@ -75,18 +75,13 @@ class PySparkBatchProcessor:
                                 continue
                             
                             # Skip unrealistic prices
-                            if product == 'BTC-USD' and (price < 1000 or price > 60000):
+                            if product == 'BTC-USD' and (price < 1000 or price > 200000):
                                 skipped += 1
                                 continue
                             elif product == 'ETH-USD' and (price < 10 or price > 10000):
                                 skipped += 1
                                 continue
-                            elif product == 'SOL-USD' and (price < 1 or price > 500):
-                                skipped += 1
-                                continue
-                            elif product == 'DOGE-USD' and (price < 0.001 or price > 1):
-                                skipped += 1
-                                continue
+
                             elif price > 1000000:
                                 skipped += 1
                                 continue
