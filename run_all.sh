@@ -44,31 +44,30 @@ echo "✅ Continuous batch processor started"
 echo -e "\n🌐 Starting Dashboard..."
 nohup python3 app.py > logs/dashboard.log 2>&1 &
 sleep 3
-echo "✅ Dashboard started"
+echo " Dashboard started"
 
 # Get IP
 PUBLIC_IP=$(curl -s --max-time 2 http://169.254.169.254/latest/meta-data/public-ipv4 2>/dev/null || echo "localhost")
 
 echo -e "\n=========================================="
-echo "✅ All Services Started!"
+echo " All Services Started!"
 echo "=========================================="
-echo "🌐 Dashboard: http://$PUBLIC_IP:5000"
+echo " Dashboard: http://$PUBLIC_IP:5000"
 echo ""
-echo "📊 Service Types:"
+echo " Service Types:"
 echo "  • Producer:      Coinbase → Kinesis + S3/raw_batch/"
 echo "  • Speed Layer:   Kinesis → S3/speed/ (Real-time windows)"
 echo "  • Batch Layer:   S3/raw_batch/ → S3/batch/ (Runs every 60s)"
 echo "  • Dashboard:     S3 → Web UI"
 echo ""
-echo "📝 Logs:"
+echo " Logs:"
 echo "  • Producer:       tail -f logs/producer.log"
 echo "  • Speed Processor: tail -f logs/speed_processor.log"
 echo "  • Batch:          tail -f logs/batch.log"
 echo "  • Dashboard:      tail -f logs/dashboard.log"
 echo ""
-echo "🛑 Stop all: pkill -f 'producer|speed_processor|app|mapreduce_complete'"
+echo " Stop all: pkill -f 'producer|speed_processor|app|mapreduce_complete'"
 echo "=========================================="
-
 
 
 
