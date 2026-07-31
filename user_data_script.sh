@@ -30,7 +30,7 @@ echo 'export PYSPARK_DRIVER_PYTHON=python3' >> /home/ec2-user/.bashrc
 source /home/ec2-user/.bashrc
 
 # Step 4: Clone code from GitHub
-echo "📂 Cloning code from GitHub..."
+echo " Cloning code from GitHub..."
 mkdir -p /home/ec2-user/project
 cd /home/ec2-user/project
 
@@ -38,7 +38,7 @@ cd /home/ec2-user/project
 REPO_URL="https://github.com/inturiabhiram-dotcom/scalable-x24315851.git"
 
 if [ -d ".git" ]; then
-    echo "✅ Git repo exists, pulling latest..."
+    echo "  Git repo exists, pulling latest..."
     git pull
 else
     echo "Cloning repository..."
@@ -46,16 +46,16 @@ else
 fi
 
 # Step 5: Make scripts executable
-echo "🔧 Making scripts executable..."
+echo "  Making scripts executable..."
 chmod +x *.sh *.py
 
 # Step 6: Create logs directory
 mkdir -p logs
 
 # Step 7: Start the FULL pipeline (with PySpark)
-echo "🚀 Starting pipeline..."
+echo " Starting pipeline..."
 nohup ./run_all.sh > /var/log/pipeline.log 2>&1 &
 
-echo "✅ EC2 Setup Complete!"
-echo "📝 Pipeline logs: tail -f /var/log/pipeline.log"
-echo "📝 User data logs: tail -f /var/log/user-data.log"
+echo "  EC2 Setup Complete!"
+echo "  Pipeline logs: tail -f /var/log/pipeline.log"
+echo "  User data logs: tail -f /var/log/user-data.log"
