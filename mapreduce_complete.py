@@ -44,7 +44,7 @@ class PySparkBatchProcessor:
             while True:
                 params = {
                     'Bucket': self.S3_BUCKET,
-                    'Prefix': 'raw_batch/',
+                    'Prefix': '/raw_batch/',
                     'MaxKeys': 100
                 }
                 if continuation_token:
