@@ -25,7 +25,7 @@ class SpeedProcessor:
         self.s3 = boto3.client("s3")
         self.kinesis = boto3.client("kinesis", region_name="us-east-1")
 
-        self.windows = defaultdict(lambda: deque(maxlen=10000))
+        self.windows = defaultdict(lambda: deque(maxlen=100))
         self.last_output = {}
         self.running = True
 
@@ -111,7 +111,7 @@ class SpeedProcessor:
             "generated_at": datetime.now(timezone.utc).isoformat()
         }
 
-        key = f"window/{product}/{window_key}.json"
+        key = f"window/{window_key}.json"
 
         self.s3.put_object(
             Bucket=S3_BUCKET,
