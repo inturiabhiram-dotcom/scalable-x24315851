@@ -341,6 +341,7 @@ class PySparkBatchProcessor:
             self.stop()
     
     def stop(self):
+         self.running=False
         self.spark.stop()
         print("✅ PySpark stopped")
 
