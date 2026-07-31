@@ -17,7 +17,7 @@ class PerformanceGraphGenerator:
         
     def get_throughput_data(self):
         """Measure throughput over time"""
-        print("📊 Measuring throughput over time...")
+        print("  Measuring throughput over time...")
         throughput_data = []
         
         for i in range(10):
@@ -57,7 +57,7 @@ class PerformanceGraphGenerator:
     
     def get_latency_data(self):
         """Measure latency at different ingestion rates"""
-        print("📊 Measuring latency vs ingestion rate...")
+        print("  Measuring latency vs ingestion rate...")
         latency_data = []
         
         rates = [10, 50, 100, 200]
@@ -113,7 +113,7 @@ class PerformanceGraphGenerator:
     
     def get_speedup_data(self, max_workers=8):
         """Measure speedup with different worker counts"""
-        print("📊 Measuring speedup vs worker count...")
+        print("  Measuring speedup vs worker count...")
         speedup_data = []
         
         # Simulate MapReduce speedup (since we can't run actual MapReduce in real-time)
@@ -145,7 +145,7 @@ class PerformanceGraphGenerator:
     def generate_graphs(self):
         """Generate all performance graphs"""
         print("\n" + "="*60)
-        print("📈 Generating Performance Graphs")
+        print("  Generating Performance Graphs")
         print("="*60)
         
         # Create directory for graphs
@@ -153,7 +153,7 @@ class PerformanceGraphGenerator:
         os.makedirs('graphs', exist_ok=True)
         
         # Graph 1: Latency vs Ingestion Rate
-        print("\n📊 Graph 1: Latency vs Ingestion Rate")
+        print("\n  Graph 1: Latency vs Ingestion Rate")
         latency_data = self.get_latency_data()
         
         if latency_data:
@@ -178,10 +178,10 @@ class PerformanceGraphGenerator:
             # Upload to S3
             self.s3.upload_file('graphs/latency_vs_ingestion_rate.png', S3_BUCKET, 
                                'benchmark/graphs/latency_vs_ingestion_rate.png')
-            print("  ✅ Latency vs Rate graph saved")
+            print("    Latency vs Rate graph saved")
         
         # Graph 2: Speedup vs Worker Count
-        print("\n📊 Graph 2: Speedup vs Worker Count")
+        print("\n  Graph 2: Speedup vs Worker Count")
         speedup_data = self.get_speedup_data()
         
         if speedup_data:
@@ -210,10 +210,10 @@ class PerformanceGraphGenerator:
             # Upload to S3
             self.s3.upload_file('graphs/speedup_vs_workers.png', S3_BUCKET, 
                                'benchmark/graphs/speedup_vs_workers.png')
-            print("  ✅ Speedup vs Workers graph saved")
+            print("    Speedup vs Workers graph saved")
         
         # Graph 3: Throughput over Time
-        print("\n📊 Graph 3: Throughput over Time")
+        print("\n  Graph 3: Throughput over Time")
         throughput_data = self.get_throughput_data()
         
         if throughput_data:
@@ -238,12 +238,12 @@ class PerformanceGraphGenerator:
             # Upload to S3
             self.s3.upload_file('graphs/throughput_over_time.png', S3_BUCKET, 
                                'benchmark/graphs/throughput_over_time.png')
-            print("  ✅ Throughput over time graph saved")
+            print("    Throughput over time graph saved")
         
         # Create a combined dashboard
         self.create_combined_dashboard(latency_data, speedup_data, throughput_data)
         
-        print("\n✅ All graphs generated and saved to 'graphs/' directory")
+        print("\n  All graphs generated and saved to 'graphs/' directory")
         print("📁 Also uploaded to S3: s3://{S3_BUCKET}/benchmark/graphs/")
 
     def create_combined_dashboard(self, latency_data, speedup_data, throughput_data):
@@ -299,11 +299,11 @@ class PerformanceGraphGenerator:
             
             # Performance insights
             if max(speedup) > 3:
-                summary_text += "\n✅ Excellent parallel scaling detected"
+                summary_text += "\n  Excellent parallel scaling detected"
             elif max(speedup) > 1.5:
-                summary_text += "\n✅ Good parallel scaling detected"
+                summary_text += "\n  Good parallel scaling detected"
             else:
-                summary_text += "\n⚠️ Limited parallel scaling detected"
+                summary_text += "\n  Limited parallel scaling detected"
         
         ax.text(0.1, 0.5, summary_text, transform=ax.transAxes, fontsize=12, 
                 verticalalignment='center', family='monospace')
@@ -315,7 +315,7 @@ class PerformanceGraphGenerator:
         # Upload to S3
         self.s3.upload_file('graphs/performance_dashboard.png', S3_BUCKET, 
                            'benchmark/graphs/performance_dashboard.png')
-        print("  ✅ Performance dashboard saved")
+        print("    Performance dashboard saved")
 
 if __name__ == "__main__":
     generator = PerformanceGraphGenerator()
