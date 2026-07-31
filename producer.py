@@ -1,7 +1,3 @@
-
-
-
-
 # producer.py - Sends to Kinesis AND batches raw data to S3
 import json
 import time
