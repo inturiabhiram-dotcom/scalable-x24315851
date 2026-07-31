@@ -10,9 +10,9 @@ import sys
 class PySparkBatchProcessor:
     def __init__(self):
         self.spark = SparkSession.builder \
-            .appName("Scalable-Cloud-Analytics") \
+            .appName("ScalableCloudAnalytics") \
             .config("spark.master", "local[*]") \
-            .config("spark.executor.memory", "6g") \
+            .config("spark.executor.memory", "2g") \
             .config("spark.driver.memory", "2g") \
             .config("spark.sql.shuffle.partitions", "8") \
             .getOrCreate()
@@ -23,13 +23,13 @@ class PySparkBatchProcessor:
         
         self.BATCH_INTERVAL_SECONDS = 60
         
-        print(f"📋 Batch Configuration:")
+        print(f"  Batch Configuration:")
         print(f"   Interval: {self.BATCH_INTERVAL_SECONDS} seconds")
         print(f"   Source: S3/raw_batch/ (batched files)")
         print(f"   Mode: FIXED - Proper min/max (NO MULTIPLICATION)")
         
     def read_all_files_from_s3(self):
-        print(f"\n📥 [{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] Reading batched data from S3/raw_batch/...")
+        print(f"\n  [{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] Reading batched data from S3/raw_batch/...")
         
         all_trades = []
         processed = 0
@@ -44,7 +44,7 @@ class PySparkBatchProcessor:
             while True:
                 params = {
                     'Bucket': self.S3_BUCKET,
-                    'Prefix': 'raw_data/',
+                    'Prefix': 'raw_batch/',
                     'MaxKeys': 100
                 }
                 if continuation_token:
@@ -81,7 +81,12 @@ class PySparkBatchProcessor:
                             elif product == 'ETH-USD' and (price < 10 or price > 10000):
                                 skipped += 1
                                 continue
-
+                            elif product == 'SOL-USD' and (price < 1 or price > 500):
+                                skipped += 1
+                                continue
+                            elif product == 'DOGE-USD' and (price < 0.001 or price > 1):
+                                skipped += 1
+                                continue
                             elif price > 1000000:
                                 skipped += 1
                                 continue
@@ -103,10 +108,10 @@ class PySparkBatchProcessor:
                     break
             
             elapsed = time.time() - start_time
-            print(f"✅ Total batch files: {total_files}, Valid records: {len(all_trades)} (skipped {skipped} invalid) in {elapsed:.2f}s")
+            print(f"  Total batch files: {total_files}, Valid records: {len(all_trades)} (skipped {skipped} invalid) in {elapsed:.2f}s")
             
         except Exception as e:
-            print(f"❌ Error reading from S3: {e}")
+            print(f"  Error reading from S3: {e}")
             import traceback
             traceback.print_exc()
         
@@ -115,19 +120,19 @@ class PySparkBatchProcessor:
     
     def process_batch(self):
         print("\n" + "="*60)
-        print(f"🚀 [{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] Starting PySpark MapReduce Batch")
+        print(f"  [{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] Starting PySpark MapReduce Batch")
         print("   (FIXED: Proper min/max - NO MULTIPLICATION)")
         print("="*60)
         
         rdd = self.read_all_files_from_s3()
         
         if rdd.isEmpty():
-            print("❌ No valid data found in S3/raw_batch/!")
+            print("  No valid data found in S3/raw_batch/!")
             return None
         
         start_time = time.time()
         total_trades = rdd.count()
-        print(f"\n📊 Processing {total_trades} valid trades using MapReduce...")
+        print(f"\n  Processing {total_trades} valid trades using MapReduce...")
         
         def mapper(trade):
             try:
@@ -167,7 +172,7 @@ class PySparkBatchProcessor:
         print(f"   Map phase: {map_count} key-value pairs generated in {time.time() - map_start:.2f}s")
         
         if map_count == 0:
-            print("❌ No key-value pairs generated!")
+            print("  No key-value pairs generated!")
             return None
         
         # SHUFFLE & REDUCE phase - FIXED: Use proper aggregation functions
@@ -239,7 +244,7 @@ class PySparkBatchProcessor:
         print(f"   Reduce phase completed in {time.time() - reduce_start:.2f}s")
         
         # Print final results for debugging
-        print("\n🔍 DEBUG - Final product aggregations (NO MULTIPLICATION):")
+        print("\n  DEBUG - Final product aggregations (NO MULTIPLICATION):")
         for product, agg in results.items():
             if agg['count'] > 0:
                 avg_price = agg['price_sum'] / agg['count']
@@ -269,13 +274,13 @@ class PySparkBatchProcessor:
         
         if batch_results:
             self.save_results(batch_results, datetime.now(timezone.utc).isoformat())
-            print(f"\n✅ Generated {len(batch_results)} product summaries")
+            print(f"\n  Generated {len(batch_results)} product summaries")
         else:
             print("⚠️ No results generated!")
             return None
         
         total_time = time.time() - start_time
-        print(f"\n✅ Batch completed in {total_time:.2f}s")
+        print(f"\n  Batch completed in {total_time:.2f}s")
         
         return batch_results
     
@@ -289,10 +294,10 @@ class PySparkBatchProcessor:
         self.s3.put_object(
             Bucket=self.S3_BUCKET,
             Key='batch/batch_summary.json',
-            Body=json.dumps(result, indent=2),
+            Body=json.dumps(results, indent=2),
             ContentType='application/json'
         )
-        print("  ✅ JSON saved to batch/batch_summary.json")
+        print("    JSON saved to batch/batch_summary.json")
         
         csv_buffer = io.StringIO()
         writer = csv.DictWriter(csv_buffer, fieldnames=results[0].keys())
@@ -300,15 +305,15 @@ class PySparkBatchProcessor:
         writer.writerows(results)
         self.s3.put_object(
             Bucket=self.S3_BUCKET,
-            Key=f'batch_summary_{timestamp.split("T")[0]}_{timestamp.split("T")[1].split(".")[0].replace(":", "-")}.csv',
+            Key=f'batch/batch_summary_{timestamp.split("T")[0]}_{timestamp.split("T")[1].split(".")[0].replace(":", "-")}.csv',
             Body=csv_buffer.getvalue(),
             ContentType='text/csv'
         )
-        print(f"  ✅ CSV saved to S3")
+        print(f"    CSV saved to S3")
     
     def run_continuous(self):
         print("\n" + "="*60)
-        print(f"🔄 Continuous Batch Processing Started (FIXED - NO MULTIPLICATION)")
+        print(f"  Continuous Batch Processing Started (FIXED - NO MULTIPLICATION)")
         print(f"   Interval: Every {self.BATCH_INTERVAL_SECONDS} seconds")
         print(f"   Press Ctrl+C to stop")
         print("="*60)
@@ -325,7 +330,7 @@ class PySparkBatchProcessor:
                 result = self.process_batch()
                 
                 if result:
-                    print(f"✅ Batch #{batch_count} completed successfully!")
+                    print(f"  Batch #{batch_count} completed successfully!")
                 else:
                     print(f"⚠️ Batch #{batch_count} failed or no data")
                 
@@ -334,19 +339,17 @@ class PySparkBatchProcessor:
                     time.sleep(self.BATCH_INTERVAL_SECONDS)
                     
         except KeyboardInterrupt:
-            print("\n\n🛑 Stopping continuous batch processor...")
+            print("\n\n  Stopping continuous batch processor...")
             self.running = False
         finally:
-            self.running=False
             self.stop()
     
     def stop(self):
-         self.running=False
         self.spark.stop()
-        print("✅ PySpark stopped")
+        print("  PySpark stopped")
 
 def signal_handler(sig, frame):
-    print("\n\n🛑 Received stop signal. Shutting down...")
+    print("\n\n  Received stop signal. Shutting down...")
     sys.exit(0)
 
 if __name__ == "__main__":
@@ -357,7 +360,7 @@ if __name__ == "__main__":
     try:
         processor.run_continuous()
     except Exception as e:
-        print(f"❌ Error: {e}")
+        print(f"  Error: {e}")
         import traceback
         traceback.print_exc()
         processor.stop()
