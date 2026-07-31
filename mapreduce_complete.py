@@ -289,7 +289,7 @@ class PySparkBatchProcessor:
         self.s3.put_object(
             Bucket=self.S3_BUCKET,
             Key='batch/batch_summary.json',
-            Body=json.dumps(results, indent=2),
+            Body=json.dumps(result, indent=2),
             ContentType='application/json'
         )
         print("  ✅ JSON saved to batch/batch_summary.json")
