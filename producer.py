@@ -45,7 +45,7 @@ def flush_buffer():
 
 def on_open(ws):
     print("Connected to Coinbase WebSocket")
-    products = ["BTC-USD", "ETH-USD", "SOL-USD", "DOGE-USD"]
+    products = ["BTC-USD", "ETH-USD", "DOGE-USD"]
 
     ws.send(json.dumps({
         "type": "subscribe",
