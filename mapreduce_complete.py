@@ -337,6 +337,7 @@ class PySparkBatchProcessor:
             print("\n\n🛑 Stopping continuous batch processor...")
             self.running = False
         finally:
+            self.running=False
             self.stop()
     
     def stop(self):
