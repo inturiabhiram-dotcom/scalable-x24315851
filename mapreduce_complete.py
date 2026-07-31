@@ -1,6 +1,3 @@
-
-
-
 # mapreduce_complete.py - FIXED: Proper min/max aggregation (NO MULTIPLICATION)
 from pyspark.sql import SparkSession
 import boto3
@@ -24,7 +21,7 @@ class PySparkBatchProcessor:
         self.S3_BUCKET = "x24315851-scalable-s3"
         self.running = True
         
-        self.BATCH_INTERVAL_SECONDS = 60
+        self.BATCH_INTERVAL_SECONDS = 30
         
         print(f"📋 Batch Configuration:")
         print(f"   Interval: {self.BATCH_INTERVAL_SECONDS} seconds")
