@@ -1,3 +1,7 @@
+
+
+
+
 # producer.py - Sends to Kinesis AND batches raw data to S3
 import json
 import time
@@ -30,7 +34,7 @@ def flush_buffer():
         
         # Create a batch file with timestamp
         timestamp = datetime.now(timezone.utc).strftime('%Y%m%d_%H%M%S')
-        batch_key = f"raw_batch/batch_{timestamp}_{len(trade-buf)}.json"
+        batch_key = f"raw_batch/batch_{timestamp}_{len(trade_buffer)}.json"
         
         # Write all trades as a JSON array
         s3.put_object(
@@ -40,12 +44,12 @@ def flush_buffer():
             ContentType='application/json'
         )
         
-        print(f"📦 Flushed {len(trade_buffer)} trades to S3: {batch_key}")
+        print(f" Flushed {len(trade_buffer)} trades to S3: {batch_key}")
         trade_buffer = []
 
 def on_open(ws):
     print("Connected to Coinbase WebSocket")
-    products = ["BTC-USD"]
+    products = ["BTC-USD", "ETH-USD", "SOL-USD", "DOGE-USD"]
 
     ws.send(json.dumps({
         "type": "subscribe",
@@ -112,7 +116,7 @@ def periodic_flush():
         flush_buffer()
 
 # Start periodic flush thread
-flush_thread = threading.Thread(target=periodic_flush, daemon=false)
+flush_thread = threading.Thread(target=periodic_flush, daemon=True)
 flush_thread.start()
 
 ws = WebSocketApp(
