@@ -15,8 +15,8 @@ logger = logging.getLogger(__name__)
 S3_BUCKET = "x24315851-scalable-s3"
 STREAM_NAME = "x24315851-kinesis-stream"
 
-WINDOW_SIZE = 30      # 1 min
-SLIDE_SIZE = 5        # 10 sec
+WINDOW_SIZE = 60      # 1 min
+SLIDE_SIZE = 10        # 10 sec
 
 
 class SpeedProcessor:
@@ -25,13 +25,13 @@ class SpeedProcessor:
         self.s3 = boto3.client("s3")
         self.kinesis = boto3.client("kinesis", region_name="us-east-1")
 
-        self.windows = defaultdict(lambda: deque(maxlen=100))
+        self.windows = defaultdict(lambda: deque(maxlen=10000))
         self.last_output = {}
         self.running = True
 
     def process_trade(self, trade):
 
-        product = trade.get("trade")
+        product = trade.get("product")
 
         if not product:
             return
@@ -111,7 +111,7 @@ class SpeedProcessor:
             "generated_at": datetime.now(timezone.utc).isoformat()
         }
 
-        key = f"window/{window_key}.json"
+        key = f"window/{product}/{window_key}.json"
 
         self.s3.put_object(
             Bucket=S3_BUCKET,
@@ -159,7 +159,7 @@ class SpeedProcessor:
 
             iterator = response["NextShardIterator"]
 
-            time.sleep(10)
+            time.sleep(1)
 
     def consume_kinesis(self):
 
