@@ -31,7 +31,7 @@ class SpeedProcessor:
 
     def process_trade(self, trade):
 
-        product = trade.get("product")
+        product = trade.get("trade")
 
         if not product:
             return
