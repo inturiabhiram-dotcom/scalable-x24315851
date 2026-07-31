@@ -300,7 +300,7 @@ class PySparkBatchProcessor:
         writer.writerows(results)
         self.s3.put_object(
             Bucket=self.S3_BUCKET,
-            Key=f'batch/batch_summary_{timestamp.split("T")[0]}_{timestamp.split("T")[1].split(".")[0].replace(":", "-")}.csv',
+            Key=f'batch_summary_{timestamp.split("T")[0]}_{timestamp.split("T")[1].split(".")[0].replace(":", "-")}.csv',
             Body=csv_buffer.getvalue(),
             ContentType='text/csv'
         )
