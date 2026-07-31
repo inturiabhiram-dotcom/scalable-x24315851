@@ -15,8 +15,8 @@ logger = logging.getLogger(__name__)
 S3_BUCKET = "x24315851-scalable-s3"
 STREAM_NAME = "x24315851-kinesis-stream"
 
-WINDOW_SIZE = 60      # 1 min
-SLIDE_SIZE = 10        # 10 sec
+WINDOW_SIZE = 30      # 1 min
+SLIDE_SIZE = 5        # 10 sec
 
 
 class SpeedProcessor:
