@@ -1,9 +1,9 @@
 Setting default log level to "WARN".
 To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
-26/07/25 07:19:18 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+26/07/25 12:45:07 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
 /home/ec2-user/venv/lib64/python3.9/site-packages/boto3/compat.py:89: PythonDeprecationWarning: Boto3 will no longer support Python 3.9 starting April 29, 2026. To continue receiving service updates, bug fixes, and security updates please upgrade to Python 3.10 or later. More information can be found here: https://aws.amazon.com/blogs/developer/python-support-policy-updates-for-aws-sdks-and-tools/
   warnings.warn(warning, PythonDeprecationWarning)
-[Stage 0:>                                                          (0 + 1) / 1]                                                                                [Stage 3:>                                                          (0 + 2) / 2]                                                                                📋 Batch Configuration:
+[Stage 0:>                                                          (0 + 1) / 1]                                                                                [Stage 3:>                                                          (0 + 2) / 2]                                                                                 Batch Configuration:
    Interval: 60 seconds
    Source: S3/raw_batch/ (batched files)
    Mode: FIXED - Proper min/max (NO MULTIPLICATION)
@@ -19,46 +19,46 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
 ############################################################
 
 ============================================================
-🚀 [2026-07-25 07:19:21] Starting PySpark MapReduce Batch
+ [2026-07-25 12:45:10] Starting PySpark MapReduce Batch
    (FIXED: Proper min/max - NO MULTIPLICATION)
 ============================================================
 
-📥 [2026-07-25 07:19:21] Reading batched data from S3/raw_batch/...
-   Page 1: found 11 batch files (total: 11)
-✅ Total batch files: 11, Valid records: 545 (skipped 0 invalid) in 0.54s
+ [2026-07-25 12:45:10] Reading batched data from S3/raw_batch/...
+   Page 1: found 6 batch files (total: 6)
+ Total batch files: 6, Valid records: 263 (skipped 0 invalid) in 0.37s
 
-📊 Processing 545 valid trades using MapReduce...
-   Map phase: 3270 key-value pairs generated in 0.23s
-   Reduce phase completed in 3.53s
+ Processing 263 valid trades using MapReduce...
+   Map phase: 1578 key-value pairs generated in 0.29s
+   Reduce phase completed in 4.76s
 
 🔍 DEBUG - Final product aggregations (NO MULTIPLICATION):
-   BTC-USD: 490 trades
-      Avg Price: $63,916.94
-      Min Price: $63,894.01  ← NOT multiplied!
-      Max Price: $63,949.04  ← NOT multiplied!
-      Buys: 208, Sells: 282
-   ETH-USD: 32 trades
-      Avg Price: $1,854.99
-      Min Price: $1,853.28  ← NOT multiplied!
-      Max Price: $1,856.73  ← NOT multiplied!
-      Buys: 6, Sells: 26
-   DOGE-USD: 7 trades
+   BTC-USD: 227 trades
+      Avg Price: $63,992.41
+      Min Price: $63,976.36  ← NOT multiplied!
+      Max Price: $64,006.30  ← NOT multiplied!
+      Buys: 186, Sells: 41
+   ETH-USD: 27 trades
+      Avg Price: $1,855.77
+      Min Price: $1,855.20  ← NOT multiplied!
+      Max Price: $1,856.63  ← NOT multiplied!
+      Buys: 6, Sells: 21
+   SOL-USD: 7 trades
+      Avg Price: $73.82
+      Min Price: $73.82  ← NOT multiplied!
+      Max Price: $73.85  ← NOT multiplied!
+      Buys: 1, Sells: 6
+   DOGE-USD: 2 trades
       Avg Price: $0.07
       Min Price: $0.07  ← NOT multiplied!
       Max Price: $0.07  ← NOT multiplied!
-      Buys: 1, Sells: 6
-   SOL-USD: 16 trades
-      Avg Price: $73.88
-      Min Price: $73.80  ← NOT multiplied!
-      Max Price: $73.96  ← NOT multiplied!
-      Buys: 8, Sells: 8
-  ✅ JSON saved to batch/batch_summary.json
-  ✅ CSV saved to S3
+      Buys: 1, Sells: 1
+   JSON saved to batch/batch_summary.json
+   CSV saved to S3
 
-✅ Generated 4 product summaries
+ Generated 4 product summaries
 
-✅ Batch completed in 4.10s
-✅ Batch #1 completed successfully!
+ Batch completed in 5.58s
+ Batch #1 completed successfully!
 
 ⏳ Waiting 60 seconds until next batch...
 
@@ -67,46 +67,46 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
 ############################################################
 
 ============================================================
-🚀 [2026-07-25 07:20:28] Starting PySpark MapReduce Batch
+ [2026-07-25 12:46:19] Starting PySpark MapReduce Batch
    (FIXED: Proper min/max - NO MULTIPLICATION)
 ============================================================
 
-📥 [2026-07-25 07:20:28] Reading batched data from S3/raw_batch/...
-   Page 1: found 12 batch files (total: 12)
-✅ Total batch files: 12, Valid records: 594 (skipped 0 invalid) in 0.42s
+ [2026-07-25 12:46:19] Reading batched data from S3/raw_batch/...
+   Page 1: found 7 batch files (total: 7)
+ Total batch files: 7, Valid records: 309 (skipped 0 invalid) in 0.28s
 
-📊 Processing 594 valid trades using MapReduce...
-   Map phase: 3564 key-value pairs generated in 0.17s
-   Reduce phase completed in 2.39s
+ Processing 309 valid trades using MapReduce...
+   Map phase: 1854 key-value pairs generated in 0.22s
+   Reduce phase completed in 2.69s
 
 🔍 DEBUG - Final product aggregations (NO MULTIPLICATION):
-   BTC-USD: 535 trades
-      Avg Price: $63,918.81
-      Min Price: $63,894.01  ← NOT multiplied!
-      Max Price: $63,949.04  ← NOT multiplied!
-      Buys: 243, Sells: 292
-   ETH-USD: 35 trades
-      Avg Price: $1,855.02
-      Min Price: $1,853.28  ← NOT multiplied!
-      Max Price: $1,856.73  ← NOT multiplied!
-      Buys: 7, Sells: 28
-   DOGE-USD: 8 trades
+   BTC-USD: 262 trades
+      Avg Price: $63,998.03
+      Min Price: $63,976.36  ← NOT multiplied!
+      Max Price: $64,034.99  ← NOT multiplied!
+      Buys: 214, Sells: 48
+   ETH-USD: 34 trades
+      Avg Price: $1,855.83
+      Min Price: $1,855.20  ← NOT multiplied!
+      Max Price: $1,856.63  ← NOT multiplied!
+      Buys: 7, Sells: 27
+   SOL-USD: 11 trades
+      Avg Price: $73.84
+      Min Price: $73.82  ← NOT multiplied!
+      Max Price: $73.86  ← NOT multiplied!
+      Buys: 2, Sells: 9
+   DOGE-USD: 2 trades
       Avg Price: $0.07
       Min Price: $0.07  ← NOT multiplied!
       Max Price: $0.07  ← NOT multiplied!
-      Buys: 1, Sells: 7
-   SOL-USD: 16 trades
-      Avg Price: $73.88
-      Min Price: $73.80  ← NOT multiplied!
-      Max Price: $73.96  ← NOT multiplied!
-      Buys: 8, Sells: 8
-  ✅ JSON saved to batch/batch_summary.json
-  ✅ CSV saved to S3
+      Buys: 1, Sells: 1
+   JSON saved to batch/batch_summary.json
+   CSV saved to S3
 
-✅ Generated 4 product summaries
+ Generated 4 product summaries
 
-✅ Batch completed in 2.77s
-✅ Batch #2 completed successfully!
+ Batch completed in 3.25s
+ Batch #2 completed successfully!
 
 ⏳ Waiting 60 seconds until next batch...
 
@@ -115,46 +115,46 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
 ############################################################
 
 ============================================================
-🚀 [2026-07-25 07:21:31] Starting PySpark MapReduce Batch
+ [2026-07-25 12:47:23] Starting PySpark MapReduce Batch
    (FIXED: Proper min/max - NO MULTIPLICATION)
 ============================================================
 
-📥 [2026-07-25 07:21:31] Reading batched data from S3/raw_batch/...
-   Page 1: found 13 batch files (total: 13)
-✅ Total batch files: 13, Valid records: 648 (skipped 0 invalid) in 0.45s
+ [2026-07-25 12:47:23] Reading batched data from S3/raw_batch/...
+   Page 1: found 8 batch files (total: 8)
+ Total batch files: 8, Valid records: 360 (skipped 0 invalid) in 0.29s
 
-📊 Processing 648 valid trades using MapReduce...
-   Map phase: 3888 key-value pairs generated in 0.13s
-   Reduce phase completed in 2.51s
+ Processing 360 valid trades using MapReduce...
+   Map phase: 2160 key-value pairs generated in 0.16s
+   Reduce phase completed in 2.45s
 
 🔍 DEBUG - Final product aggregations (NO MULTIPLICATION):
-   BTC-USD: 588 trades
-      Avg Price: $63,921.77
-      Min Price: $63,894.01  ← NOT multiplied!
-      Max Price: $63,961.12  ← NOT multiplied!
-      Buys: 290, Sells: 298
-   ETH-USD: 36 trades
-      Avg Price: $1,855.04
-      Min Price: $1,853.28  ← NOT multiplied!
-      Max Price: $1,856.73  ← NOT multiplied!
-      Buys: 8, Sells: 28
-   DOGE-USD: 8 trades
+   BTC-USD: 309 trades
+      Avg Price: $64,003.44
+      Min Price: $63,976.36  ← NOT multiplied!
+      Max Price: $64,034.99  ← NOT multiplied!
+      Buys: 256, Sells: 53
+   ETH-USD: 38 trades
+      Avg Price: $1,855.86
+      Min Price: $1,855.20  ← NOT multiplied!
+      Max Price: $1,856.63  ← NOT multiplied!
+      Buys: 7, Sells: 31
+   SOL-USD: 11 trades
+      Avg Price: $73.84
+      Min Price: $73.82  ← NOT multiplied!
+      Max Price: $73.86  ← NOT multiplied!
+      Buys: 2, Sells: 9
+   DOGE-USD: 2 trades
       Avg Price: $0.07
       Min Price: $0.07  ← NOT multiplied!
       Max Price: $0.07  ← NOT multiplied!
-      Buys: 1, Sells: 7
-   SOL-USD: 16 trades
-      Avg Price: $73.88
-      Min Price: $73.80  ← NOT multiplied!
-      Max Price: $73.96  ← NOT multiplied!
-      Buys: 8, Sells: 8
-  ✅ JSON saved to batch/batch_summary.json
-  ✅ CSV saved to S3
+      Buys: 1, Sells: 1
+   JSON saved to batch/batch_summary.json
+   CSV saved to S3
 
-✅ Generated 4 product summaries
+ Generated 4 product summaries
 
-✅ Batch completed in 2.83s
-✅ Batch #3 completed successfully!
+ Batch completed in 2.84s
+ Batch #3 completed successfully!
 
 ⏳ Waiting 60 seconds until next batch...
 
@@ -163,46 +163,46 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
 ############################################################
 
 ============================================================
-🚀 [2026-07-25 07:22:35] Starting PySpark MapReduce Batch
+ [2026-07-25 12:48:26] Starting PySpark MapReduce Batch
    (FIXED: Proper min/max - NO MULTIPLICATION)
 ============================================================
 
-📥 [2026-07-25 07:22:35] Reading batched data from S3/raw_batch/...
-   Page 1: found 14 batch files (total: 14)
-✅ Total batch files: 14, Valid records: 701 (skipped 0 invalid) in 0.57s
+ [2026-07-25 12:48:26] Reading batched data from S3/raw_batch/...
+   Page 1: found 9 batch files (total: 9)
+ Total batch files: 9, Valid records: 404 (skipped 0 invalid) in 0.32s
 
-📊 Processing 701 valid trades using MapReduce...
-   Map phase: 4206 key-value pairs generated in 0.11s
-   Reduce phase completed in 2.01s
+ Processing 404 valid trades using MapReduce...
+   Map phase: 2424 key-value pairs generated in 0.13s
+   Reduce phase completed in 3.17s
 
 🔍 DEBUG - Final product aggregations (NO MULTIPLICATION):
-   BTC-USD: 638 trades
-      Avg Price: $63,924.34
-      Min Price: $63,894.01  ← NOT multiplied!
-      Max Price: $63,961.12  ← NOT multiplied!
-      Buys: 335, Sells: 303
-   ETH-USD: 38 trades
-      Avg Price: $1,855.08
-      Min Price: $1,853.28  ← NOT multiplied!
-      Max Price: $1,856.73  ← NOT multiplied!
-      Buys: 8, Sells: 30
-   DOGE-USD: 8 trades
+   BTC-USD: 345 trades
+      Avg Price: $64,007.37
+      Min Price: $63,976.36  ← NOT multiplied!
+      Max Price: $64,049.72  ← NOT multiplied!
+      Buys: 277, Sells: 68
+   ETH-USD: 43 trades
+      Avg Price: $1,855.96
+      Min Price: $1,855.20  ← NOT multiplied!
+      Max Price: $1,857.00  ← NOT multiplied!
+      Buys: 8, Sells: 35
+   SOL-USD: 13 trades
+      Avg Price: $73.84
+      Min Price: $73.82  ← NOT multiplied!
+      Max Price: $73.88  ← NOT multiplied!
+      Buys: 2, Sells: 11
+   DOGE-USD: 3 trades
       Avg Price: $0.07
       Min Price: $0.07  ← NOT multiplied!
       Max Price: $0.07  ← NOT multiplied!
-      Buys: 1, Sells: 7
-   SOL-USD: 17 trades
-      Avg Price: $73.88
-      Min Price: $73.80  ← NOT multiplied!
-      Max Price: $73.96  ← NOT multiplied!
-      Buys: 8, Sells: 9
-  ✅ JSON saved to batch/batch_summary.json
-  ✅ CSV saved to S3
+      Buys: 1, Sells: 2
+   JSON saved to batch/batch_summary.json
+   CSV saved to S3
 
-✅ Generated 4 product summaries
+ Generated 4 product summaries
 
-✅ Batch completed in 2.36s
-✅ Batch #4 completed successfully!
+ Batch completed in 3.50s
+ Batch #4 completed successfully!
 
 ⏳ Waiting 60 seconds until next batch...
 
@@ -211,46 +211,46 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
 ############################################################
 
 ============================================================
-🚀 [2026-07-25 07:23:38] Starting PySpark MapReduce Batch
+ [2026-07-25 12:49:30] Starting PySpark MapReduce Batch
    (FIXED: Proper min/max - NO MULTIPLICATION)
 ============================================================
 
-📥 [2026-07-25 07:23:38] Reading batched data from S3/raw_batch/...
-   Page 1: found 15 batch files (total: 15)
-✅ Total batch files: 15, Valid records: 750 (skipped 0 invalid) in 0.50s
+ [2026-07-25 12:49:30] Reading batched data from S3/raw_batch/...
+   Page 1: found 10 batch files (total: 10)
+ Total batch files: 10, Valid records: 454 (skipped 0 invalid) in 0.39s
 
-📊 Processing 750 valid trades using MapReduce...
-   Map phase: 4500 key-value pairs generated in 0.11s
-   Reduce phase completed in 1.91s
+ Processing 454 valid trades using MapReduce...
+   Map phase: 2724 key-value pairs generated in 0.11s
+   Reduce phase completed in 2.31s
 
 🔍 DEBUG - Final product aggregations (NO MULTIPLICATION):
-   BTC-USD: 684 trades
-      Avg Price: $63,927.20
-      Min Price: $63,894.01  ← NOT multiplied!
-      Max Price: $63,971.76  ← NOT multiplied!
-      Buys: 375, Sells: 309
-   ETH-USD: 39 trades
-      Avg Price: $1,855.11
-      Min Price: $1,853.28  ← NOT multiplied!
-      Max Price: $1,856.73  ← NOT multiplied!
-      Buys: 8, Sells: 31
-   DOGE-USD: 10 trades
+   BTC-USD: 384 trades
+      Avg Price: $64,011.55
+      Min Price: $63,976.36  ← NOT multiplied!
+      Max Price: $64,054.46  ← NOT multiplied!
+      Buys: 310, Sells: 74
+   ETH-USD: 49 trades
+      Avg Price: $1,856.08
+      Min Price: $1,855.20  ← NOT multiplied!
+      Max Price: $1,857.30  ← NOT multiplied!
+      Buys: 10, Sells: 39
+   SOL-USD: 18 trades
+      Avg Price: $73.84
+      Min Price: $73.82  ← NOT multiplied!
+      Max Price: $73.88  ← NOT multiplied!
+      Buys: 4, Sells: 14
+   DOGE-USD: 3 trades
       Avg Price: $0.07
       Min Price: $0.07  ← NOT multiplied!
       Max Price: $0.07  ← NOT multiplied!
-      Buys: 2, Sells: 8
-   SOL-USD: 17 trades
-      Avg Price: $73.88
-      Min Price: $73.80  ← NOT multiplied!
-      Max Price: $73.96  ← NOT multiplied!
-      Buys: 8, Sells: 9
-  ✅ JSON saved to batch/batch_summary.json
-  ✅ CSV saved to S3
+      Buys: 1, Sells: 2
+   JSON saved to batch/batch_summary.json
+   CSV saved to S3
 
-✅ Generated 4 product summaries
+ Generated 4 product summaries
 
-✅ Batch completed in 2.28s
-✅ Batch #5 completed successfully!
+ Batch completed in 2.61s
+ Batch #5 completed successfully!
 
 ⏳ Waiting 60 seconds until next batch...
 
@@ -259,46 +259,46 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
 ############################################################
 
 ============================================================
-🚀 [2026-07-25 07:24:41] Starting PySpark MapReduce Batch
+ [2026-07-25 12:50:33] Starting PySpark MapReduce Batch
    (FIXED: Proper min/max - NO MULTIPLICATION)
 ============================================================
 
-📥 [2026-07-25 07:24:41] Reading batched data from S3/raw_batch/...
-   Page 1: found 16 batch files (total: 16)
-✅ Total batch files: 16, Valid records: 802 (skipped 0 invalid) in 0.50s
+ [2026-07-25 12:50:33] Reading batched data from S3/raw_batch/...
+   Page 1: found 11 batch files (total: 11)
+ Total batch files: 11, Valid records: 504 (skipped 0 invalid) in 0.39s
 
-📊 Processing 802 valid trades using MapReduce...
-   Map phase: 4812 key-value pairs generated in 0.13s
-   Reduce phase completed in 1.90s
+ Processing 504 valid trades using MapReduce...
+   Map phase: 3024 key-value pairs generated in 0.15s
+   Reduce phase completed in 2.47s
 
 🔍 DEBUG - Final product aggregations (NO MULTIPLICATION):
-   BTC-USD: 735 trades
-      Avg Price: $63,930.22
-      Min Price: $63,894.01  ← NOT multiplied!
-      Max Price: $63,971.76  ← NOT multiplied!
-      Buys: 418, Sells: 317
-   ETH-USD: 39 trades
-      Avg Price: $1,855.11
-      Min Price: $1,853.28  ← NOT multiplied!
-      Max Price: $1,856.73  ← NOT multiplied!
-      Buys: 8, Sells: 31
-   DOGE-USD: 10 trades
+   BTC-USD: 425 trades
+      Avg Price: $64,013.95
+      Min Price: $63,976.36  ← NOT multiplied!
+      Max Price: $64,054.46  ← NOT multiplied!
+      Buys: 347, Sells: 78
+   ETH-USD: 53 trades
+      Avg Price: $1,856.13
+      Min Price: $1,855.20  ← NOT multiplied!
+      Max Price: $1,857.30  ← NOT multiplied!
+      Buys: 14, Sells: 39
+   SOL-USD: 22 trades
+      Avg Price: $73.84
+      Min Price: $73.82  ← NOT multiplied!
+      Max Price: $73.88  ← NOT multiplied!
+      Buys: 4, Sells: 18
+   DOGE-USD: 4 trades
       Avg Price: $0.07
       Min Price: $0.07  ← NOT multiplied!
       Max Price: $0.07  ← NOT multiplied!
-      Buys: 2, Sells: 8
-   SOL-USD: 18 trades
-      Avg Price: $73.88
-      Min Price: $73.80  ← NOT multiplied!
-      Max Price: $73.96  ← NOT multiplied!
-      Buys: 8, Sells: 10
-  ✅ JSON saved to batch/batch_summary.json
-  ✅ CSV saved to S3
+      Buys: 2, Sells: 2
+   JSON saved to batch/batch_summary.json
+   CSV saved to S3
 
-✅ Generated 4 product summaries
+ Generated 4 product summaries
 
-✅ Batch completed in 2.20s
-✅ Batch #6 completed successfully!
+ Batch completed in 2.88s
+ Batch #6 completed successfully!
 
 ⏳ Waiting 60 seconds until next batch...
 
@@ -307,46 +307,46 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
 ############################################################
 
 ============================================================
-🚀 [2026-07-25 07:25:44] Starting PySpark MapReduce Batch
+ [2026-07-25 12:51:37] Starting PySpark MapReduce Batch
    (FIXED: Proper min/max - NO MULTIPLICATION)
 ============================================================
 
-📥 [2026-07-25 07:25:44] Reading batched data from S3/raw_batch/...
-   Page 1: found 17 batch files (total: 17)
-✅ Total batch files: 17, Valid records: 851 (skipped 0 invalid) in 0.54s
+ [2026-07-25 12:51:37] Reading batched data from S3/raw_batch/...
+   Page 1: found 12 batch files (total: 12)
+ Total batch files: 12, Valid records: 556 (skipped 0 invalid) in 0.41s
 
-📊 Processing 851 valid trades using MapReduce...
-   Map phase: 5106 key-value pairs generated in 0.15s
-   Reduce phase completed in 1.66s
+ Processing 556 valid trades using MapReduce...
+   Map phase: 3336 key-value pairs generated in 0.12s
+   Reduce phase completed in 2.20s
 
 🔍 DEBUG - Final product aggregations (NO MULTIPLICATION):
-   BTC-USD: 778 trades
-      Avg Price: $63,932.58
-      Min Price: $63,894.01  ← NOT multiplied!
-      Max Price: $63,979.88  ← NOT multiplied!
-      Buys: 441, Sells: 337
-   ETH-USD: 42 trades
-      Avg Price: $1,855.22
-      Min Price: $1,853.28  ← NOT multiplied!
-      Max Price: $1,856.73  ← NOT multiplied!
-      Buys: 9, Sells: 33
-   DOGE-USD: 10 trades
+   BTC-USD: 473 trades
+      Avg Price: $64,016.09
+      Min Price: $63,976.36  ← NOT multiplied!
+      Max Price: $64,054.46  ← NOT multiplied!
+      Buys: 381, Sells: 92
+   ETH-USD: 53 trades
+      Avg Price: $1,856.13
+      Min Price: $1,855.20  ← NOT multiplied!
+      Max Price: $1,857.30  ← NOT multiplied!
+      Buys: 14, Sells: 39
+   SOL-USD: 26 trades
+      Avg Price: $73.84
+      Min Price: $73.82  ← NOT multiplied!
+      Max Price: $73.88  ← NOT multiplied!
+      Buys: 5, Sells: 21
+   DOGE-USD: 4 trades
       Avg Price: $0.07
       Min Price: $0.07  ← NOT multiplied!
       Max Price: $0.07  ← NOT multiplied!
-      Buys: 2, Sells: 8
-   SOL-USD: 21 trades
-      Avg Price: $73.88
-      Min Price: $73.80  ← NOT multiplied!
-      Max Price: $73.96  ← NOT multiplied!
-      Buys: 10, Sells: 11
-  ✅ JSON saved to batch/batch_summary.json
-  ✅ CSV saved to S3
+      Buys: 2, Sells: 2
+   JSON saved to batch/batch_summary.json
+   CSV saved to S3
 
-✅ Generated 4 product summaries
+ Generated 4 product summaries
 
-✅ Batch completed in 1.98s
-✅ Batch #7 completed successfully!
+ Batch completed in 2.57s
+ Batch #7 completed successfully!
 
 ⏳ Waiting 60 seconds until next batch...
 
@@ -355,46 +355,46 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
 ############################################################
 
 ============================================================
-🚀 [2026-07-25 07:26:46] Starting PySpark MapReduce Batch
+ [2026-07-25 12:52:40] Starting PySpark MapReduce Batch
    (FIXED: Proper min/max - NO MULTIPLICATION)
 ============================================================
 
-📥 [2026-07-25 07:26:46] Reading batched data from S3/raw_batch/...
-   Page 1: found 18 batch files (total: 18)
-✅ Total batch files: 18, Valid records: 899 (skipped 0 invalid) in 0.58s
+ [2026-07-25 12:52:40] Reading batched data from S3/raw_batch/...
+   Page 1: found 13 batch files (total: 13)
+ Total batch files: 13, Valid records: 607 (skipped 0 invalid) in 0.44s
 
-📊 Processing 899 valid trades using MapReduce...
-   Map phase: 5394 key-value pairs generated in 0.10s
-   Reduce phase completed in 1.69s
+ Processing 607 valid trades using MapReduce...
+   Map phase: 3642 key-value pairs generated in 0.15s
+   Reduce phase completed in 2.24s
 
 🔍 DEBUG - Final product aggregations (NO MULTIPLICATION):
-   BTC-USD: 823 trades
-      Avg Price: $63,934.04
-      Min Price: $63,894.01  ← NOT multiplied!
-      Max Price: $63,979.88  ← NOT multiplied!
-      Buys: 471, Sells: 352
-   ETH-USD: 43 trades
-      Avg Price: $1,855.24
-      Min Price: $1,853.28  ← NOT multiplied!
-      Max Price: $1,856.73  ← NOT multiplied!
-      Buys: 9, Sells: 34
-   DOGE-USD: 10 trades
+   BTC-USD: 517 trades
+      Avg Price: $64,017.91
+      Min Price: $63,976.36  ← NOT multiplied!
+      Max Price: $64,054.46  ← NOT multiplied!
+      Buys: 412, Sells: 105
+   ETH-USD: 56 trades
+      Avg Price: $1,856.18
+      Min Price: $1,855.20  ← NOT multiplied!
+      Max Price: $1,857.30  ← NOT multiplied!
+      Buys: 15, Sells: 41
+   SOL-USD: 30 trades
+      Avg Price: $73.84
+      Min Price: $73.82  ← NOT multiplied!
+      Max Price: $73.88  ← NOT multiplied!
+      Buys: 5, Sells: 25
+   DOGE-USD: 4 trades
       Avg Price: $0.07
       Min Price: $0.07  ← NOT multiplied!
       Max Price: $0.07  ← NOT multiplied!
-      Buys: 2, Sells: 8
-   SOL-USD: 23 trades
-      Avg Price: $73.88
-      Min Price: $73.80  ← NOT multiplied!
-      Max Price: $73.96  ← NOT multiplied!
-      Buys: 12, Sells: 11
-  ✅ JSON saved to batch/batch_summary.json
-  ✅ CSV saved to S3
+      Buys: 2, Sells: 2
+   JSON saved to batch/batch_summary.json
+   CSV saved to S3
 
-✅ Generated 4 product summaries
+ Generated 4 product summaries
 
-✅ Batch completed in 1.95s
-✅ Batch #8 completed successfully!
+ Batch completed in 2.59s
+ Batch #8 completed successfully!
 
 ⏳ Waiting 60 seconds until next batch...
 
@@ -403,46 +403,46 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
 ############################################################
 
 ============================================================
-🚀 [2026-07-25 07:27:49] Starting PySpark MapReduce Batch
+ [2026-07-25 12:53:43] Starting PySpark MapReduce Batch
    (FIXED: Proper min/max - NO MULTIPLICATION)
 ============================================================
 
-📥 [2026-07-25 07:27:49] Reading batched data from S3/raw_batch/...
-   Page 1: found 19 batch files (total: 19)
-✅ Total batch files: 19, Valid records: 948 (skipped 0 invalid) in 0.60s
+ [2026-07-25 12:53:43] Reading batched data from S3/raw_batch/...
+   Page 1: found 15 batch files (total: 15)
+ Total batch files: 15, Valid records: 710 (skipped 0 invalid) in 0.51s
 
-📊 Processing 948 valid trades using MapReduce...
-   Map phase: 5688 key-value pairs generated in 0.09s
-   Reduce phase completed in 1.61s
+ Processing 710 valid trades using MapReduce...
+   Map phase: 4260 key-value pairs generated in 0.16s
+   Reduce phase completed in 1.90s
 
 🔍 DEBUG - Final product aggregations (NO MULTIPLICATION):
-   BTC-USD: 867 trades
-      Avg Price: $63,935.29
-      Min Price: $63,894.01  ← NOT multiplied!
-      Max Price: $63,979.88  ← NOT multiplied!
-      Buys: 504, Sells: 363
-   ETH-USD: 48 trades
-      Avg Price: $1,855.36
-      Min Price: $1,853.28  ← NOT multiplied!
-      Max Price: $1,856.73  ← NOT multiplied!
-      Buys: 10, Sells: 38
-   DOGE-USD: 10 trades
+   BTC-USD: 608 trades
+      Avg Price: $64,021.25
+      Min Price: $63,976.36  ← NOT multiplied!
+      Max Price: $64,054.46  ← NOT multiplied!
+      Buys: 495, Sells: 113
+   ETH-USD: 61 trades
+      Avg Price: $1,856.27
+      Min Price: $1,855.20  ← NOT multiplied!
+      Max Price: $1,857.39  ← NOT multiplied!
+      Buys: 17, Sells: 44
+   SOL-USD: 37 trades
+      Avg Price: $73.84
+      Min Price: $73.82  ← NOT multiplied!
+      Max Price: $73.88  ← NOT multiplied!
+      Buys: 7, Sells: 30
+   DOGE-USD: 4 trades
       Avg Price: $0.07
       Min Price: $0.07  ← NOT multiplied!
       Max Price: $0.07  ← NOT multiplied!
-      Buys: 2, Sells: 8
-   SOL-USD: 23 trades
-      Avg Price: $73.88
-      Min Price: $73.80  ← NOT multiplied!
-      Max Price: $73.96  ← NOT multiplied!
-      Buys: 12, Sells: 11
-  ✅ JSON saved to batch/batch_summary.json
-  ✅ CSV saved to S3
+      Buys: 2, Sells: 2
+   JSON saved to batch/batch_summary.json
+   CSV saved to S3
 
-✅ Generated 4 product summaries
+ Generated 4 product summaries
 
-✅ Batch completed in 1.88s
-✅ Batch #9 completed successfully!
+ Batch completed in 2.27s
+ Batch #9 completed successfully!
 
 ⏳ Waiting 60 seconds until next batch...
 
@@ -451,27 +451,522 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
 ############################################################
 
 ============================================================
-🚀 [2026-07-25 07:28:52] Starting PySpark MapReduce Batch
+ [2026-07-25 12:54:46] Starting PySpark MapReduce Batch
    (FIXED: Proper min/max - NO MULTIPLICATION)
 ============================================================
 
-📥 [2026-07-25 07:28:52] Reading batched data from S3/raw_batch/...
-   Page 1: found 20 batch files (total: 20)
-✅ Total batch files: 20, Valid records: 991 (skipped 0 invalid) in 0.69s
+ [2026-07-25 12:54:46] Reading batched data from S3/raw_batch/...
+   Page 1: found 16 batch files (total: 16)
+ Total batch files: 16, Valid records: 761 (skipped 0 invalid) in 0.52s
 
-📊 Processing 991 valid trades using MapReduce...
-   Map phase: 5946 key-value pairs generated in 0.06s
-   Reduce phase completed in 1.44s
+ Processing 761 valid trades using MapReduce...
+   Map phase: 4566 key-value pairs generated in 0.10s
+   Reduce phase completed in 2.00s
 
 🔍 DEBUG - Final product aggregations (NO MULTIPLICATION):
-   BTC-USD: 904 trades
-      Avg Price: $63,936.34
-      Min Price: $63,894.01  ← NOT multiplied!
-      Max Price: $63,979.88  ← NOT multiplied!
-      Buys: 524, Sells: 380
-   ETH-USD: 51 trades
-      Avg Price: $1,855.42
-      Min Price: $1,853.28  ← NOT multiplied!
-      Max Price: $1,856.73  ← NOT multiplied!
-      Buys: 11, Sells: 40
-   DOGE-USD: 10 trades
+   BTC-USD: 652 trades
+      Avg Price: $64,022.44
+      Min Price: $63,976.36  ← NOT multiplied!
+      Max Price: $64,054.46  ← NOT multiplied!
+      Buys: 533, Sells: 119
+   ETH-USD: 65 trades
+      Avg Price: $1,856.33
+      Min Price: $1,855.20  ← NOT multiplied!
+      Max Price: $1,857.39  ← NOT multiplied!
+      Buys: 19, Sells: 46
+   SOL-USD: 39 trades
+      Avg Price: $73.84
+      Min Price: $73.82  ← NOT multiplied!
+      Max Price: $73.88  ← NOT multiplied!
+      Buys: 8, Sells: 31
+   DOGE-USD: 5 trades
+      Avg Price: $0.07
+      Min Price: $0.07  ← NOT multiplied!
+      Max Price: $0.07  ← NOT multiplied!
+      Buys: 3, Sells: 2
+   JSON saved to batch/batch_summary.json
+   CSV saved to S3
+
+ Generated 4 product summaries
+
+ Batch completed in 2.28s
+ Batch #10 completed successfully!
+
+⏳ Waiting 60 seconds until next batch...
+
+############################################################
+# BATCH RUN #11 (FIXED)
+############################################################
+
+============================================================
+ [2026-07-25 12:55:49] Starting PySpark MapReduce Batch
+   (FIXED: Proper min/max - NO MULTIPLICATION)
+============================================================
+
+ [2026-07-25 12:55:49] Reading batched data from S3/raw_batch/...
+   Page 1: found 17 batch files (total: 17)
+ Total batch files: 17, Valid records: 811 (skipped 0 invalid) in 0.56s
+
+ Processing 811 valid trades using MapReduce...
+   Map phase: 4866 key-value pairs generated in 0.11s
+   Reduce phase completed in 2.12s
+
+🔍 DEBUG - Final product aggregations (NO MULTIPLICATION):
+   BTC-USD: 694 trades
+      Avg Price: $64,024.01
+      Min Price: $63,976.36  ← NOT multiplied!
+      Max Price: $64,054.46  ← NOT multiplied!
+      Buys: 571, Sells: 123
+   ETH-USD: 70 trades
+      Avg Price: $1,856.42
+      Min Price: $1,855.20  ← NOT multiplied!
+      Max Price: $1,857.78  ← NOT multiplied!
+      Buys: 20, Sells: 50
+   SOL-USD: 41 trades
+      Avg Price: $73.84
+      Min Price: $73.82  ← NOT multiplied!
+      Max Price: $73.88  ← NOT multiplied!
+      Buys: 8, Sells: 33
+   DOGE-USD: 6 trades
+      Avg Price: $0.07
+      Min Price: $0.07  ← NOT multiplied!
+      Max Price: $0.07  ← NOT multiplied!
+      Buys: 4, Sells: 2
+   JSON saved to batch/batch_summary.json
+   CSV saved to S3
+
+ Generated 4 product summaries
+
+ Batch completed in 2.42s
+ Batch #11 completed successfully!
+
+⏳ Waiting 60 seconds until next batch...
+
+############################################################
+# BATCH RUN #12 (FIXED)
+############################################################
+
+============================================================
+ [2026-07-25 12:56:52] Starting PySpark MapReduce Batch
+   (FIXED: Proper min/max - NO MULTIPLICATION)
+============================================================
+
+ [2026-07-25 12:56:52] Reading batched data from S3/raw_batch/...
+   Page 1: found 18 batch files (total: 18)
+ Total batch files: 18, Valid records: 863 (skipped 0 invalid) in 0.65s
+
+ Processing 863 valid trades using MapReduce...
+   Map phase: 5178 key-value pairs generated in 0.08s
+   Reduce phase completed in 1.64s
+
+🔍 DEBUG - Final product aggregations (NO MULTIPLICATION):
+   BTC-USD: 741 trades
+      Avg Price: $64,025.27
+      Min Price: $63,976.36  ← NOT multiplied!
+      Max Price: $64,054.46  ← NOT multiplied!
+      Buys: 610, Sells: 131
+   ETH-USD: 73 trades
+      Avg Price: $1,856.48
+      Min Price: $1,855.20  ← NOT multiplied!
+      Max Price: $1,857.99  ← NOT multiplied!
+      Buys: 21, Sells: 52
+   SOL-USD: 43 trades
+      Avg Price: $73.84
+      Min Price: $73.82  ← NOT multiplied!
+      Max Price: $73.88  ← NOT multiplied!
+      Buys: 9, Sells: 34
+   DOGE-USD: 6 trades
+      Avg Price: $0.07
+      Min Price: $0.07  ← NOT multiplied!
+      Max Price: $0.07  ← NOT multiplied!
+      Buys: 4, Sells: 2
+   JSON saved to batch/batch_summary.json
+   CSV saved to S3
+
+ Generated 4 product summaries
+
+ Batch completed in 1.89s
+ Batch #12 completed successfully!
+
+⏳ Waiting 60 seconds until next batch...
+
+############################################################
+# BATCH RUN #13 (FIXED)
+############################################################
+
+============================================================
+ [2026-07-25 12:57:55] Starting PySpark MapReduce Batch
+   (FIXED: Proper min/max - NO MULTIPLICATION)
+============================================================
+
+ [2026-07-25 12:57:55] Reading batched data from S3/raw_batch/...
+   Page 1: found 19 batch files (total: 19)
+ Total batch files: 19, Valid records: 909 (skipped 0 invalid) in 0.60s
+
+ Processing 909 valid trades using MapReduce...
+   Map phase: 5454 key-value pairs generated in 0.07s
+   Reduce phase completed in 1.78s
+
+🔍 DEBUG - Final product aggregations (NO MULTIPLICATION):
+   BTC-USD: 778 trades
+      Avg Price: $64,026.37
+      Min Price: $63,976.36  ← NOT multiplied!
+      Max Price: $64,054.46  ← NOT multiplied!
+      Buys: 644, Sells: 134
+   ETH-USD: 76 trades
+      Avg Price: $1,856.53
+      Min Price: $1,855.20  ← NOT multiplied!
+      Max Price: $1,857.99  ← NOT multiplied!
+      Buys: 23, Sells: 53
+   SOL-USD: 48 trades
+      Avg Price: $73.84
+      Min Price: $73.82  ← NOT multiplied!
+      Max Price: $73.88  ← NOT multiplied!
+      Buys: 12, Sells: 36
+   DOGE-USD: 7 trades
+      Avg Price: $0.07
+      Min Price: $0.07  ← NOT multiplied!
+      Max Price: $0.07  ← NOT multiplied!
+      Buys: 4, Sells: 3
+   JSON saved to batch/batch_summary.json
+   CSV saved to S3
+
+ Generated 4 product summaries
+
+ Batch completed in 1.99s
+ Batch #13 completed successfully!
+
+⏳ Waiting 60 seconds until next batch...
+
+############################################################
+# BATCH RUN #14 (FIXED)
+############################################################
+
+============================================================
+ [2026-07-25 12:58:58] Starting PySpark MapReduce Batch
+   (FIXED: Proper min/max - NO MULTIPLICATION)
+============================================================
+
+ [2026-07-25 12:58:58] Reading batched data from S3/raw_batch/...
+   Page 1: found 20 batch files (total: 20)
+ Total batch files: 20, Valid records: 953 (skipped 0 invalid) in 0.67s
+
+ Processing 953 valid trades using MapReduce...
+   Map phase: 5718 key-value pairs generated in 0.14s
+   Reduce phase completed in 2.25s
+
+🔍 DEBUG - Final product aggregations (NO MULTIPLICATION):
+   BTC-USD: 812 trades
+      Avg Price: $64,027.31
+      Min Price: $63,976.36  ← NOT multiplied!
+      Max Price: $64,054.46  ← NOT multiplied!
+      Buys: 668, Sells: 144
+   ETH-USD: 83 trades
+      Avg Price: $1,856.61
+      Min Price: $1,855.20  ← NOT multiplied!
+      Max Price: $1,857.99  ← NOT multiplied!
+      Buys: 23, Sells: 60
+   SOL-USD: 50 trades
+      Avg Price: $73.84
+      Min Price: $73.82  ← NOT multiplied!
+      Max Price: $73.88  ← NOT multiplied!
+      Buys: 12, Sells: 38
+   DOGE-USD: 8 trades
+      Avg Price: $0.07
+      Min Price: $0.07  ← NOT multiplied!
+      Max Price: $0.07  ← NOT multiplied!
+      Buys: 5, Sells: 3
+   JSON saved to batch/batch_summary.json
+   CSV saved to S3
+
+ Generated 4 product summaries
+
+ Batch completed in 2.61s
+ Batch #14 completed successfully!
+
+⏳ Waiting 60 seconds until next batch...
+
+############################################################
+# BATCH RUN #15 (FIXED)
+############################################################
+
+============================================================
+ [2026-07-25 13:00:01] Starting PySpark MapReduce Batch
+   (FIXED: Proper min/max - NO MULTIPLICATION)
+============================================================
+
+ [2026-07-25 13:00:01] Reading batched data from S3/raw_batch/...
+   Page 1: found 21 batch files (total: 21)
+ Total batch files: 21, Valid records: 1000 (skipped 0 invalid) in 0.91s
+
+ Processing 1000 valid trades using MapReduce...
+   Map phase: 6000 key-value pairs generated in 0.42s
+   Reduce phase completed in 4.82s
+
+🔍 DEBUG - Final product aggregations (NO MULTIPLICATION):
+   BTC-USD: 847 trades
+      Avg Price: $64,028.26
+      Min Price: $63,976.36  ← NOT multiplied!
+      Max Price: $64,055.98  ← NOT multiplied!
+      Buys: 690, Sells: 157
+   ETH-USD: 88 trades
+      Avg Price: $1,856.68
+      Min Price: $1,855.20  ← NOT multiplied!
+      Max Price: $1,858.00  ← NOT multiplied!
+      Buys: 25, Sells: 63
+   SOL-USD: 57 trades
+      Avg Price: $73.85
+      Min Price: $73.82  ← NOT multiplied!
+      Max Price: $73.88  ← NOT multiplied!
+      Buys: 13, Sells: 44
+   DOGE-USD: 8 trades
+      Avg Price: $0.07
+      Min Price: $0.07  ← NOT multiplied!
+      Max Price: $0.07  ← NOT multiplied!
+      Buys: 5, Sells: 3
+   JSON saved to batch/batch_summary.json
+   CSV saved to S3
+
+ Generated 4 product summaries
+
+ Batch completed in 6.09s
+ Batch #15 completed successfully!
+
+⏳ Waiting 60 seconds until next batch...
+
+############################################################
+# BATCH RUN #16 (FIXED)
+############################################################
+
+============================================================
+ [2026-07-25 13:01:08] Starting PySpark MapReduce Batch
+   (FIXED: Proper min/max - NO MULTIPLICATION)
+============================================================
+
+ [2026-07-25 13:01:08] Reading batched data from S3/raw_batch/...
+   Page 1: found 22 batch files (total: 22)
+ Total batch files: 22, Valid records: 1048 (skipped 0 invalid) in 0.94s
+
+ Processing 1048 valid trades using MapReduce...
+   Map phase: 6288 key-value pairs generated in 0.21s
+   Reduce phase completed in 3.11s
+
+🔍 DEBUG - Final product aggregations (NO MULTIPLICATION):
+   BTC-USD: 881 trades
+      Avg Price: $64,029.25
+      Min Price: $63,976.36  ← NOT multiplied!
+      Max Price: $64,055.99  ← NOT multiplied!
+      Buys: 717, Sells: 164
+   ETH-USD: 96 trades
+      Avg Price: $1,856.80
+      Min Price: $1,855.20  ← NOT multiplied!
+      Max Price: $1,858.39  ← NOT multiplied!
+      Buys: 27, Sells: 69
+   SOL-USD: 59 trades
+      Avg Price: $73.85
+      Min Price: $73.82  ← NOT multiplied!
+      Max Price: $73.90  ← NOT multiplied!
+      Buys: 14, Sells: 45
+   DOGE-USD: 12 trades
+      Avg Price: $0.07
+      Min Price: $0.07  ← NOT multiplied!
+      Max Price: $0.07  ← NOT multiplied!
+      Buys: 8, Sells: 4
+   JSON saved to batch/batch_summary.json
+   CSV saved to S3
+
+ Generated 4 product summaries
+
+ Batch completed in 3.58s
+ Batch #16 completed successfully!
+
+⏳ Waiting 60 seconds until next batch...
+
+############################################################
+# BATCH RUN #17 (FIXED)
+############################################################
+
+============================================================
+ [2026-07-25 13:02:13] Starting PySpark MapReduce Batch
+   (FIXED: Proper min/max - NO MULTIPLICATION)
+============================================================
+
+ [2026-07-25 13:02:13] Reading batched data from S3/raw_batch/...
+   Page 1: found 23 batch files (total: 23)
+ Total batch files: 23, Valid records: 1096 (skipped 0 invalid) in 0.84s
+
+ Processing 1096 valid trades using MapReduce...
+   Map phase: 6576 key-value pairs generated in 0.12s
+   Reduce phase completed in 3.10s
+
+🔍 DEBUG - Final product aggregations (NO MULTIPLICATION):
+   BTC-USD: 921 trades
+      Avg Price: $64,030.07
+      Min Price: $63,976.36  ← NOT multiplied!
+      Max Price: $64,055.99  ← NOT multiplied!
+      Buys: 747, Sells: 174
+   ETH-USD: 99 trades
+      Avg Price: $1,856.84
+      Min Price: $1,855.20  ← NOT multiplied!
+      Max Price: $1,858.39  ← NOT multiplied!
+      Buys: 29, Sells: 70
+   SOL-USD: 62 trades
+      Avg Price: $73.85
+      Min Price: $73.82  ← NOT multiplied!
+      Max Price: $73.90  ← NOT multiplied!
+      Buys: 15, Sells: 47
+   DOGE-USD: 14 trades
+      Avg Price: $0.07
+      Min Price: $0.07  ← NOT multiplied!
+      Max Price: $0.07  ← NOT multiplied!
+      Buys: 8, Sells: 6
+   JSON saved to batch/batch_summary.json
+   CSV saved to S3
+
+ Generated 4 product summaries
+
+ Batch completed in 3.39s
+ Batch #17 completed successfully!
+
+⏳ Waiting 60 seconds until next batch...
+
+############################################################
+# BATCH RUN #18 (FIXED)
+############################################################
+
+============================================================
+ [2026-07-25 13:03:18] Starting PySpark MapReduce Batch
+   (FIXED: Proper min/max - NO MULTIPLICATION)
+============================================================
+
+ [2026-07-25 13:03:18] Reading batched data from S3/raw_batch/...
+   Page 1: found 24 batch files (total: 24)
+ Total batch files: 24, Valid records: 1142 (skipped 0 invalid) in 0.86s
+
+ Processing 1142 valid trades using MapReduce...
+   Map phase: 6852 key-value pairs generated in 0.29s
+   Reduce phase completed in 2.76s
+
+🔍 DEBUG - Final product aggregations (NO MULTIPLICATION):
+   BTC-USD: 958 trades
+      Avg Price: $64,030.85
+      Min Price: $63,976.36  ← NOT multiplied!
+      Max Price: $64,057.91  ← NOT multiplied!
+      Buys: 773, Sells: 185
+   ETH-USD: 105 trades
+      Avg Price: $1,856.92
+      Min Price: $1,855.20  ← NOT multiplied!
+      Max Price: $1,858.68  ← NOT multiplied!
+      Buys: 32, Sells: 73
+   SOL-USD: 65 trades
+      Avg Price: $73.85
+      Min Price: $73.82  ← NOT multiplied!
+      Max Price: $73.90  ← NOT multiplied!
+      Buys: 17, Sells: 48
+   DOGE-USD: 14 trades
+      Avg Price: $0.07
+      Min Price: $0.07  ← NOT multiplied!
+      Max Price: $0.07  ← NOT multiplied!
+      Buys: 8, Sells: 6
+   JSON saved to batch/batch_summary.json
+   CSV saved to S3
+
+ Generated 4 product summaries
+
+ Batch completed in 3.27s
+ Batch #18 completed successfully!
+
+⏳ Waiting 60 seconds until next batch...
+
+############################################################
+# BATCH RUN #19 (FIXED)
+############################################################
+
+============================================================
+ [2026-07-25 13:04:22] Starting PySpark MapReduce Batch
+   (FIXED: Proper min/max - NO MULTIPLICATION)
+============================================================
+
+ [2026-07-25 13:04:22] Reading batched data from S3/raw_batch/...
+   Page 1: found 25 batch files (total: 25)
+ Total batch files: 25, Valid records: 1193 (skipped 0 invalid) in 0.87s
+
+ Processing 1193 valid trades using MapReduce...
+   Map phase: 7158 key-value pairs generated in 0.14s
+   Reduce phase completed in 3.39s
+
+🔍 DEBUG - Final product aggregations (NO MULTIPLICATION):
+   BTC-USD: 1002 trades
+      Avg Price: $64,032.22
+      Min Price: $63,976.36  ← NOT multiplied!
+      Max Price: $64,069.02  ← NOT multiplied!
+      Buys: 808, Sells: 194
+   ETH-USD: 108 trades
+      Avg Price: $1,857.01
+      Min Price: $1,855.20  ← NOT multiplied!
+      Max Price: $1,860.36  ← NOT multiplied!
+      Buys: 32, Sells: 76
+   SOL-USD: 67 trades
+      Avg Price: $73.85
+      Min Price: $73.82  ← NOT multiplied!
+      Max Price: $73.93  ← NOT multiplied!
+      Buys: 17, Sells: 50
+   DOGE-USD: 16 trades
+      Avg Price: $0.07
+      Min Price: $0.07  ← NOT multiplied!
+      Max Price: $0.07  ← NOT multiplied!
+      Buys: 10, Sells: 6
+   JSON saved to batch/batch_summary.json
+   CSV saved to S3
+
+ Generated 4 product summaries
+
+ Batch completed in 3.73s
+ Batch #19 completed successfully!
+
+⏳ Waiting 60 seconds until next batch...
+
+############################################################
+# BATCH RUN #20 (FIXED)
+############################################################
+
+============================================================
+ [2026-07-25 13:05:27] Starting PySpark MapReduce Batch
+   (FIXED: Proper min/max - NO MULTIPLICATION)
+============================================================
+
+ [2026-07-25 13:05:27] Reading batched data from S3/raw_batch/...
+   Page 1: found 26 batch files (total: 26)
+ Total batch files: 26, Valid records: 1245 (skipped 0 invalid) in 0.98s
+
+ Processing 1245 valid trades using MapReduce...
+   Map phase: 7470 key-value pairs generated in 0.17s
+   Reduce phase completed in 2.89s
+
+🔍 DEBUG - Final product aggregations (NO MULTIPLICATION):
+   BTC-USD: 1045 trades
+      Avg Price: $64,033.52
+      Min Price: $63,976.36  ← NOT multiplied!
+      Max Price: $64,069.02  ← NOT multiplied!
+      Buys: 847, Sells: 198
+   ETH-USD: 114 trades
+      Avg Price: $1,857.18
+      Min Price: $1,855.20  ← NOT multiplied!
+      Max Price: $1,860.59  ← NOT multiplied!
+      Buys: 36, Sells: 78
+   SOL-USD: 68 trades
+      Avg Price: $73.86
+      Min Price: $73.82  ← NOT multiplied!
+      Max Price: $73.93  ← NOT multiplied!
+      Buys: 18, Sells: 50
+   DOGE-USD: 18 trades
+      Avg Price: $0.07
+      Min Price: $0.07  ← NOT multiplied!
+      Max Price: $0.07  ← NOT multiplied!
+      Buys: 12, Sells: 6
+   JSON saved to batch/batch_summary.json
+   CSV saved to S3
+
+ Generated 4 product summaries
+
+ Batch completed in 3.37s

@@ -1,0 +1,65 @@
+[
+  {
+    "timestamp": "2026-07-25T12:46:05.793353",
+    "action": "scale_down",
+    "old_capacity": 2,
+    "new_capacity": 1,
+    "reason": "CPU 0.2% < 10% for 60s"
+  },
+  {
+    "timestamp": "2026-07-25T12:46:52.983674",
+    "action": "scale_up",
+    "old_capacity": 1,
+    "new_capacity": 2,
+    "reason": "CPU 40.3% > 20%"
+  },
+  {
+    "timestamp": "2026-07-25T12:48:10.121892",
+    "action": "scale_down",
+    "old_capacity": 2,
+    "new_capacity": 1,
+    "reason": "CPU 0.0% < 10% for 60s"
+  },
+  {
+    "timestamp": "2026-07-25T12:51:44.513846",
+    "action": "scale_up",
+    "old_capacity": 1,
+    "new_capacity": 2,
+    "reason": "CPU 20.4% > 20%"
+  },
+  {
+    "timestamp": "2026-07-25T12:53:16.510882",
+    "action": "scale_down",
+    "old_capacity": 2,
+    "new_capacity": 1,
+    "reason": "CPU 0.0% < 10% for 60s"
+  },
+  {
+    "timestamp": "2026-07-25T13:01:41.308732",
+    "action": "scale_up",
+    "old_capacity": 1,
+    "new_capacity": 2,
+    "reason": "CPU 32.0% > 20%"
+  },
+  {
+    "timestamp": "2026-07-25T13:03:13.825860",
+    "action": "scale_down",
+    "old_capacity": 2,
+    "new_capacity": 1,
+    "reason": "CPU 0.0% < 10% for 60s"
+  },
+  {
+    "timestamp": "2026-07-25T13:06:33.798703",
+    "action": "scale_up",
+    "old_capacity": 1,
+    "new_capacity": 2,
+    "reason": "CPU 97.2% > 20%"
+  },
+  {
+    "timestamp": "2026-07-25T13:08:06.275528",
+    "action": "scale_down",
+    "old_capacity": 2,
+    "new_capacity": 1,
+    "reason": "CPU 0.0% < 10% for 60s"
+  }
+]

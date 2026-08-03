@@ -11,7 +11,11 @@ set -e
 exec > >(tee /var/log/user-data.log|logger -t user-data -s 2>/dev/console) 2>&1
 
 echo "=========================================="
+<<<<<<< HEAD
 echo "  Starting EC2 Setup from GitHub"
+=======
+echo " Starting EC2 Setup from GitHub"
+>>>>>>> 6cc3086 (changes)
 echo "=========================================="
 
 # Colors
@@ -20,6 +24,7 @@ YELLOW='\033[1;33m'
 NC='\033[0m'
 
 # Step 1: Update system
+<<<<<<< HEAD
 echo -e "${YELLOW}  Updating system packages...${NC}"
 yum update -y
 
@@ -29,6 +34,17 @@ yum install -y python3 python3-pip git
 
 # Step 3: Install Python packages (lightweight version)
 echo -e "${YELLOW}  Installing Python packages...${NC}"
+=======
+echo -e "${YELLOW} Updating system packages...${NC}"
+yum update -y
+
+# Step 2: Install dependencies
+echo -e "${YELLOW} Installing dependencies...${NC}"
+yum install -y python3 python3-pip git
+
+# Step 3: Install Python packages (lightweight version)
+echo -e "${YELLOW} Installing Python packages...${NC}"
+>>>>>>> 6cc3086 (changes)
 pip3 install boto3 websocket-client flask pandas schedule
 
 # Step 4: Clone code from GitHub
@@ -56,7 +72,11 @@ chmod +x *.py
 mkdir -p logs
 
 # Step 7: Start the pipeline (lightweight version)
+<<<<<<< HEAD
 echo -e "${GREEN}  Starting the pipeline...${NC}"
+=======
+echo -e "${GREEN} Starting the pipeline...${NC}"
+>>>>>>> 6cc3086 (changes)
 if [ -f "run_all_light.sh" ]; then
     nohup ./run_all_light.sh > /var/log/pipeline.log 2>&1 &
 else

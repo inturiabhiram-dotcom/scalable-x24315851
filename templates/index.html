@@ -314,7 +314,7 @@
                 const data = await response.json();
                 
                 if (data.error) {
-                    statusEl.textContent = '⚠️ Error: ' + data.error;
+                    statusEl.textContent = ' Error: ' + data.error;
                     statusEl.className = 'status-text error';
                     return;
                 }
@@ -372,7 +372,7 @@
                 
             } catch (error) {
                 console.error('Fetch error:', error);
-                statusEl.textContent = '⚠️ Connection error';
+                statusEl.textContent = ' Connection error';
                 statusEl.className = 'status-text error';
             }
         }

@@ -8,20 +8,20 @@ set -e
 exec > >(tee /var/log/user-data.log|logger -t user-data -s 2>/dev/console) 2>&1
 
 echo "=========================================="
-echo "🚀 Auto-Scaling EC2 Instance Setup"
+echo " Auto-Scaling EC2 Instance Setup"
 echo "=========================================="
 
 # Step 1: Install dependencies
-echo "📦 Installing system dependencies..."
+echo " Installing system dependencies..."
 yum update -y
 yum install -y python3 python3-pip git java-11-amazon-corretto-devel
 
 # Step 2: Install Python packages
-echo "🐍 Installing Python packages..."
+echo " Installing Python packages..."
 pip3 install boto3 websocket-client flask pandas pyspark schedule
 
 # Step 3: Setup Java for PySpark
-echo "☕ Setting up Java environment..."
+echo " Setting up Java environment..."
 alternatives --set java /usr/lib/jvm/java-11-openjdk/bin/java
 echo 'export JAVA_HOME=/usr/lib/jvm/java-11-openjdk' >> /home/ec2-user/.bashrc
 echo 'export PATH=$JAVA_HOME/bin:$PATH' >> /home/ec2-user/.bashrc
@@ -38,7 +38,11 @@ cd /home/ec2-user/project
 REPO_URL="https://github.com/inturiabhiram-dotcom/scalable-x24315851.git"
 
 if [ -d ".git" ]; then
+<<<<<<< HEAD
     echo "  Git repo exists, pulling latest..."
+=======
+    echo " Git repo exists, pulling latest..."
+>>>>>>> 6cc3086 (changes)
     git pull
 else
     echo "Cloning repository..."
@@ -46,7 +50,11 @@ else
 fi
 
 # Step 5: Make scripts executable
+<<<<<<< HEAD
 echo "  Making scripts executable..."
+=======
+echo " Making scripts executable..."
+>>>>>>> 6cc3086 (changes)
 chmod +x *.sh *.py
 
 # Step 6: Create logs directory
@@ -56,6 +64,12 @@ mkdir -p logs
 echo " Starting pipeline..."
 nohup ./run_all.sh > /var/log/pipeline.log 2>&1 &
 
+<<<<<<< HEAD
 echo "  EC2 Setup Complete!"
 echo "  Pipeline logs: tail -f /var/log/pipeline.log"
 echo "  User data logs: tail -f /var/log/user-data.log"
+=======
+echo " EC2 Setup Complete!"
+echo " Pipeline logs: tail -f /var/log/pipeline.log"
+echo " User data logs: tail -f /var/log/user-data.log"
+>>>>>>> 6cc3086 (changes)

@@ -29,17 +29,25 @@ class PerformanceBenchmark:
     def measure_throughput(self):
         """Measure throughput over time using real data from S3"""
         print("\n" + "="*60)
+<<<<<<< HEAD
         print("  MEASURING THROUGHPUT OVER TIME")
+=======
+        print(" MEASURING THROUGHPUT OVER TIME")
+>>>>>>> 6cc3086 (changes)
         print("="*60)
         
         throughput_data = []
         
         # Read speed files from S3
+<<<<<<< HEAD
         print("  Reading speed data from S3...")
+=======
+        print(" Reading speed data from S3...")
+>>>>>>> 6cc3086 (changes)
         response = self.s3.list_objects_v2(Bucket=S3_BUCKET, Prefix='speed/', MaxKeys=5000)
         
         if 'Contents' not in response:
-            print("❌ No data found in S3!")
+            print(" No data found in S3!")
             return []
         
         files = response['Contents']
@@ -85,29 +93,45 @@ class PerformanceBenchmark:
                 'volume': data['volume_sum']
             })
         
+<<<<<<< HEAD
         print(f"  Measured {len(throughput_data)} minutes of data")
+=======
+        print(f" Measured {len(throughput_data)} minutes of data")
+>>>>>>> 6cc3086 (changes)
         
         # Save to CSV
         df = pd.DataFrame(throughput_data)
         df.to_csv('benchmark_results/throughput_data.csv', index=False)
+<<<<<<< HEAD
         print(f"  Saved to benchmark_results/throughput_data.csv")
+=======
+        print(f" Saved to benchmark_results/throughput_data.csv")
+>>>>>>> 6cc3086 (changes)
         
         return throughput_data
     
     def measure_latency_vs_rate(self):
         """Measure latency at different ingestion rates"""
         print("\n" + "="*60)
+<<<<<<< HEAD
         print("  MEASURING LATENCY VS INGESTION RATE")
+=======
+        print(" MEASURING LATENCY VS INGESTION RATE")
+>>>>>>> 6cc3086 (changes)
         print("="*60)
         
         # Get real trade data from S3
         response = self.s3.list_objects_v2(Bucket=S3_BUCKET, Prefix='speed/', MaxKeys=1000)
         
         if 'Contents' not in response:
-            print("❌ No data found!")
+            print(" No data found!")
             return []
         
+<<<<<<< HEAD
         print("  Analyzing trade data for latency...")
+=======
+        print(" Analyzing trade data for latency...")
+>>>>>>> 6cc3086 (changes)
         
         # Measure latency from actual trades
         latencies = []
@@ -138,7 +162,11 @@ class PerformanceBenchmark:
                 pass
         
         if not latencies:
+<<<<<<< HEAD
             print("  No latency data found, using simulated data")
+=======
+            print(" No latency data found, using simulated data")
+>>>>>>> 6cc3086 (changes)
             # Fallback to simulated but realistic data
             rates = [10, 50, 100, 200, 500]
             latency_data = []
@@ -169,24 +197,36 @@ class PerformanceBenchmark:
         # Save to CSV
         df = pd.DataFrame(latency_data)
         df.to_csv('benchmark_results/latency_data.csv', index=False)
+<<<<<<< HEAD
         print(f"  Saved to benchmark_results/latency_data.csv")
+=======
+        print(f" Saved to benchmark_results/latency_data.csv")
+>>>>>>> 6cc3086 (changes)
         
         return latency_data
     
     def measure_speedup_vs_workers(self):
         """Measure speedup with different worker counts using real data"""
         print("\n" + "="*60)
+<<<<<<< HEAD
         print("  MEASURING SPEEDUP VS WORKER COUNT")
+=======
+        print(" MEASURING SPEEDUP VS WORKER COUNT")
+>>>>>>> 6cc3086 (changes)
         print("="*60)
         
         # Get real data from S3
         response = self.s3.list_objects_v2(Bucket=S3_BUCKET, Prefix='speed/', MaxKeys=500)
         
         if 'Contents' not in response:
-            print("❌ No data found!")
+            print(" No data found!")
             return []
         
+<<<<<<< HEAD
         print("  Reading data for MapReduce benchmark...")
+=======
+        print(" Reading data for MapReduce benchmark...")
+>>>>>>> 6cc3086 (changes)
         trades = []
         for obj in response['Contents'][:200]:
             try:
@@ -198,7 +238,11 @@ class PerformanceBenchmark:
                 pass
         
         if not trades:
+<<<<<<< HEAD
             print("  No data available, using simulated data")
+=======
+            print(" No data available, using simulated data")
+>>>>>>> 6cc3086 (changes)
             # Fallback
             worker_counts = [1, 2, 4, 8, 16]
             speedup_data = []
@@ -253,7 +297,11 @@ class PerformanceBenchmark:
         # Save to CSV
         df = pd.DataFrame(speedup_data)
         df.to_csv('benchmark_results/speedup_data.csv', index=False)
+<<<<<<< HEAD
         print(f"  Saved to benchmark_results/speedup_data.csv")
+=======
+        print(f" Saved to benchmark_results/speedup_data.csv")
+>>>>>>> 6cc3086 (changes)
         
         return speedup_data
     
@@ -317,7 +365,7 @@ class PerformanceBenchmark:
     def generate_graphs(self, throughput_data, latency_data, speedup_data):
         """Generate all performance graphs for report"""
         print("\n" + "="*60)
-        print("📈 GENERATING PERFORMANCE GRAPHS FOR REPORT")
+        print(" GENERATING PERFORMANCE GRAPHS FOR REPORT")
         print("="*60)
         
         # Create directory for graphs
@@ -335,8 +383,13 @@ class PerformanceBenchmark:
         # Graph 4: Combined Dashboard
         self.plot_combined_dashboard(throughput_data, latency_data, speedup_data)
         
+<<<<<<< HEAD
         print("\n  All graphs generated!")
         print("  Location: benchmark_results/graphs/")
+=======
+        print("\n All graphs generated!")
+        print(" Location: benchmark_results/graphs/")
+>>>>>>> 6cc3086 (changes)
     
     def plot_speedup_vs_workers(self, data):
         """Plot speedup vs worker count"""
@@ -381,7 +434,11 @@ class PerformanceBenchmark:
         plt.savefig('benchmark_results/graphs/speedup_vs_workers.png', dpi=300, bbox_inches='tight')
         plt.savefig('benchmark_results/graphs/speedup_vs_workers.pdf', bbox_inches='tight')
         plt.close()
+<<<<<<< HEAD
         print("    Generated speedup_vs_workers.png")
+=======
+        print("   Generated speedup_vs_workers.png")
+>>>>>>> 6cc3086 (changes)
     
     def plot_latency_vs_rate(self, data):
         """Plot latency vs ingestion rate"""
@@ -418,14 +475,22 @@ class PerformanceBenchmark:
         plt.savefig('benchmark_results/graphs/latency_vs_rate.png', dpi=300, bbox_inches='tight')
         plt.savefig('benchmark_results/graphs/latency_vs_rate.pdf', bbox_inches='tight')
         plt.close()
+<<<<<<< HEAD
         print("    Generated latency_vs_rate.png")
+=======
+        print("   Generated latency_vs_rate.png")
+>>>>>>> 6cc3086 (changes)
     
     def plot_throughput_over_time(self, data):
         """Plot throughput over time"""
         fig, ax = plt.subplots(figsize=(12, 6))
         
         if not data:
+<<<<<<< HEAD
             print("    No throughput data to plot")
+=======
+            print("   No throughput data to plot")
+>>>>>>> 6cc3086 (changes)
             return
         
         timestamps = [d['timestamp'] for d in data]
@@ -462,7 +527,11 @@ class PerformanceBenchmark:
         plt.savefig('benchmark_results/graphs/throughput_over_time.png', dpi=300, bbox_inches='tight')
         plt.savefig('benchmark_results/graphs/throughput_over_time.pdf', bbox_inches='tight')
         plt.close()
+<<<<<<< HEAD
         print("    Generated throughput_over_time.png")
+=======
+        print("   Generated throughput_over_time.png")
+>>>>>>> 6cc3086 (changes)
     
     def plot_combined_dashboard(self, throughput_data, latency_data, speedup_data):
         """Create a combined performance dashboard"""
@@ -523,7 +592,11 @@ class PerformanceBenchmark:
         max_speedup = max([d['speedup'] for d in speedup_data]) if speedup_data else 0
         best_efficiency = max([d['efficiency'] for d in speedup_data]) if speedup_data else 0
         
+<<<<<<< HEAD
         summary_text = "  PERFORMANCE SUMMARY\n" + "="*35 + "\n\n"
+=======
+        summary_text = " PERFORMANCE SUMMARY\n" + "="*35 + "\n\n"
+>>>>>>> 6cc3086 (changes)
         summary_text += f"• Peak Throughput: {max_throughput:.0f} trades/min\n"
         summary_text += f"• Avg Throughput: {avg_throughput:.0f} trades/min\n"
         summary_text += f"• Avg Latency: {avg_latency:.0f} ms\n"
@@ -533,6 +606,7 @@ class PerformanceBenchmark:
         summary_text += "\n" + "="*35 + "\n"
         
         if max_speedup > 3:
+<<<<<<< HEAD
             summary_text += "  Excellent parallel scaling!\n"
         elif max_speedup > 1.5:
             summary_text += "  Good parallel scaling!\n"
@@ -545,6 +619,20 @@ class PerformanceBenchmark:
             summary_text += "  Moderate throughput\n"
         else:
             summary_text += "  Low throughput\n"
+=======
+            summary_text += " Excellent parallel scaling!\n"
+        elif max_speedup > 1.5:
+            summary_text += " Good parallel scaling!\n"
+        else:
+            summary_text += " Limited parallel scaling\n"
+        
+        if max_throughput > 50:
+            summary_text += " High throughput achieved!\n"
+        elif max_throughput > 30:
+            summary_text += " Moderate throughput\n"
+        else:
+            summary_text += " Low throughput\n"
+>>>>>>> 6cc3086 (changes)
         
         ax4.text(0.1, 0.9, summary_text, transform=ax4.transAxes, fontsize=12, 
                 verticalalignment='top', family='monospace')
@@ -554,12 +642,20 @@ class PerformanceBenchmark:
         plt.savefig('benchmark_results/graphs/performance_dashboard.png', dpi=300, bbox_inches='tight')
         plt.savefig('benchmark_results/graphs/performance_dashboard.pdf', bbox_inches='tight')
         plt.close()
+<<<<<<< HEAD
         print("    Generated performance_dashboard.png")
+=======
+        print("   Generated performance_dashboard.png")
+>>>>>>> 6cc3086 (changes)
     
     def generate_report_data(self):
         """Generate all performance data and save to JSON"""
         print("\n" + "="*60)
+<<<<<<< HEAD
         print("  GENERATING COMPLETE PERFORMANCE REPORT")
+=======
+        print(" GENERATING COMPLETE PERFORMANCE REPORT")
+>>>>>>> 6cc3086 (changes)
         print("="*60)
         
         # Collect all data
@@ -588,11 +684,19 @@ class PerformanceBenchmark:
         with open('benchmark_results/performance_report.json', 'w') as f:
             json.dump(report, f, indent=2)
         
+<<<<<<< HEAD
         print(f"\n  Report saved to benchmark_results/performance_report.json")
         
         # Print summary
         print("\n" + "="*60)
         print("  PERFORMANCE SUMMARY FOR REPORT")
+=======
+        print(f"\n Report saved to benchmark_results/performance_report.json")
+        
+        # Print summary
+        print("\n" + "="*60)
+        print(" PERFORMANCE SUMMARY FOR REPORT")
+>>>>>>> 6cc3086 (changes)
         print("="*60)
         print(f"  • Peak Throughput: {report['summary']['peak_throughput']:.0f} trades/min")
         print(f"  • Average Latency: {report['summary']['avg_latency']:.0f} ms")
@@ -604,18 +708,31 @@ class PerformanceBenchmark:
 
 if __name__ == "__main__":
     print("="*60)
+<<<<<<< HEAD
     print("  SCALABLE CLOUD ANALYTICS - PERFORMANCE BENCHMARK")
+=======
+    print(" SCALABLE CLOUD ANALYTICS - PERFORMANCE BENCHMARK")
+>>>>>>> 6cc3086 (changes)
     print("   Running real performance measurements for report")
     print("="*60)
     
     benchmark = PerformanceBenchmark()
     report = benchmark.generate_report_data()
     
+<<<<<<< HEAD
     print("\n  All performance measurements complete!")
     print("  Results saved to: benchmark_results/")
+=======
+    print("\n All performance measurements complete!")
+    print(" Results saved to: benchmark_results/")
+>>>>>>> 6cc3086 (changes)
     print("   - benchmark_results/graphs/ (PNG and PDF files)")
     print("   - benchmark_results/performance_report.json")
     print("   - benchmark_results/throughput_data.csv")
     print("   - benchmark_results/latency_data.csv")
     print("   - benchmark_results/speedup_data.csv")
+<<<<<<< HEAD
     print("\nThese results are ready for your IEEE report!  ")
+=======
+    print("\nThese results are ready for your IEEE report! ")
+>>>>>>> 6cc3086 (changes)

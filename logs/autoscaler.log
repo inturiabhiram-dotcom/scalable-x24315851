@@ -1,0 +1,255 @@
+/home/ec2-user/venv/lib64/python3.9/site-packages/boto3/compat.py:89: PythonDeprecationWarning: Boto3 will no longer support Python 3.9 starting April 29, 2026. To continue receiving service updates, bug fixes, and security updates please upgrade to Python 3.10 or later. More information can be found here: https://aws.amazon.com/blogs/developer/python-support-policy-updates-for-aws-sdks-and-tools/
+  warnings.warn(warning, PythonDeprecationWarning)
+2026-07-25 12:45:02,464 [INFO] Found credentials from IAM Role: LabRole
+2026-07-25 12:45:03,496 [INFO] Using AMI: ami-0b826bb6d96d2afe4
+2026-07-25 12:45:03,764 [INFO]  Tagged main instance: i-07479a77ba5a4396a
+2026-07-25 12:45:04,056 [INFO]  Initial capacity: 2
+2026-07-25 12:45:04,324 [INFO] 
+[1]  Status: 2 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 12:45:04,325 [INFO] ⏳ Low traffic detected (0.0%), waiting 60s...
+2026-07-25 12:45:19,559 [INFO] 
+[2]  Status: 2 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 12:45:34,761 [INFO] 
+[3]  Status: 2 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 12:45:49,971 [INFO] 
+[4]  Status: 2 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 12:45:49,971 [INFO]  No scaling needed
+2026-07-25 12:46:05,224 [INFO] 
+[5]  Status: 2 custom instances | CPU: 0.2% | Dashboard:  Running
+2026-07-25 12:46:05,792 [INFO]  Terminated EC2 instance: i-0ef67261c26fe7eac
+2026-07-25 12:46:05,793 [INFO] 📉 SCALED DOWN: 2 → 1 | Reason: CPU 0.2% < 10% for 60s
+2026-07-25 12:46:21,054 [INFO] 
+[6]  Status: 1 custom instances | CPU: 40.3% | Dashboard:  Running
+2026-07-25 12:46:21,054 [INFO] ⏳ Cooldown: 14s remaining
+2026-07-25 12:46:36,450 [INFO] 
+[7]  Status: 1 custom instances | CPU: 40.3% | Dashboard:  Running
+2026-07-25 12:46:36,450 [INFO]  Launching new EC2 instance...
+2026-07-25 12:46:37,715 [INFO]  Instance i-0305665ed30bb9a61 launched successfully!
+2026-07-25 12:46:52,983 [INFO]  Instance i-0305665ed30bb9a61 is now running
+2026-07-25 12:46:52,983 [INFO] 📈 SCALED UP: 1 → 2 | Reason: CPU 40.3% > 20%
+2026-07-25 12:47:08,392 [INFO] 
+[8]  Status: 2 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 12:47:08,392 [INFO] ⏳ Low traffic detected (0.0%), waiting 60s...
+2026-07-25 12:47:08,392 [INFO]  No scaling needed
+2026-07-25 12:47:23,728 [INFO] 
+[9]  Status: 2 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 12:47:38,974 [INFO] 
+[10]  Status: 2 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 12:47:54,188 [INFO] 
+[11]  Status: 2 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 12:48:09,407 [INFO] 
+[12]  Status: 2 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 12:48:10,121 [INFO]  Terminated EC2 instance: i-0305665ed30bb9a61
+2026-07-25 12:48:10,121 [INFO] 📉 SCALED DOWN: 2 → 1 | Reason: CPU 0.0% < 10% for 60s
+2026-07-25 12:48:25,363 [INFO] 
+[13]  Status: 1 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 12:48:40,580 [INFO] 
+[14]  Status: 1 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 12:48:55,793 [INFO] 
+[15]  Status: 1 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 12:49:11,069 [INFO] 
+[16]  Status: 1 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 12:49:11,069 [INFO]  No scaling needed
+2026-07-25 12:49:26,266 [INFO] 
+[17]  Status: 1 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 12:49:41,441 [INFO] 
+[18]  Status: 1 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 12:49:56,753 [INFO] 
+[19]  Status: 1 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 12:50:11,965 [INFO] 
+[20]  Status: 1 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 12:50:11,965 [INFO]  No scaling needed
+2026-07-25 12:50:27,159 [INFO] 
+[21]  Status: 1 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 12:50:42,371 [INFO] 
+[22]  Status: 1 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 12:50:57,614 [INFO] 
+[23]  Status: 1 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 12:51:12,832 [INFO] 
+[24]  Status: 1 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 12:51:12,833 [INFO]  No scaling needed
+2026-07-25 12:51:28,027 [INFO] 
+[25]  Status: 1 custom instances | CPU: 20.4% | Dashboard:  Running
+2026-07-25 12:51:28,027 [INFO]  Launching new EC2 instance...
+2026-07-25 12:51:29,284 [INFO]  Instance i-07b34885dcd430ccf launched successfully!
+2026-07-25 12:51:44,513 [INFO]  Instance i-07b34885dcd430ccf is now running
+2026-07-25 12:51:44,513 [INFO] 📈 SCALED UP: 1 → 2 | Reason: CPU 20.4% > 20%
+2026-07-25 12:51:59,881 [INFO] 
+[26]  Status: 2 custom instances | CPU: 20.4% | Dashboard:  Running
+2026-07-25 12:51:59,882 [INFO] ⏳ Cooldown: 14s remaining
+2026-07-25 12:52:15,129 [INFO] 
+[27]  Status: 2 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 12:52:15,130 [INFO] ⏳ Low traffic detected (0.0%), waiting 60s...
+2026-07-25 12:52:30,339 [INFO] 
+[28]  Status: 2 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 12:52:30,340 [INFO]  No scaling needed
+2026-07-25 12:52:45,563 [INFO] 
+[29]  Status: 2 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 12:53:00,765 [INFO] 
+[30]  Status: 2 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 12:53:15,987 [INFO] 
+[31]  Status: 2 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 12:53:16,510 [INFO]  Terminated EC2 instance: i-07b34885dcd430ccf
+2026-07-25 12:53:16,510 [INFO] 📉 SCALED DOWN: 2 → 1 | Reason: CPU 0.0% < 10% for 60s
+2026-07-25 12:53:31,743 [INFO] 
+[32]  Status: 1 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 12:53:31,743 [INFO]  No scaling needed
+2026-07-25 12:53:46,935 [INFO] 
+[33]  Status: 1 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 12:54:02,548 [INFO] 
+[34]  Status: 1 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 12:54:17,738 [INFO] 
+[35]  Status: 1 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 12:54:32,931 [INFO] 
+[36]  Status: 1 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 12:54:32,932 [INFO]  No scaling needed
+2026-07-25 12:54:48,556 [INFO] 
+[37]  Status: 1 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 12:55:03,767 [INFO] 
+[38]  Status: 1 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 12:55:18,966 [INFO] 
+[39]  Status: 1 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 12:55:34,157 [INFO] 
+[40]  Status: 1 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 12:55:34,157 [INFO]  No scaling needed
+2026-07-25 12:55:49,378 [INFO] 
+[41]  Status: 1 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 12:56:04,585 [INFO] 
+[42]  Status: 1 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 12:56:19,783 [INFO] 
+[43]  Status: 1 custom instances | CPU: 19.3% | Dashboard:  Running
+2026-07-25 12:56:34,985 [INFO] 
+[44]  Status: 1 custom instances | CPU: 19.3% | Dashboard:  Running
+2026-07-25 12:56:34,985 [INFO]  No scaling needed
+2026-07-25 12:56:50,216 [INFO] 
+[45]  Status: 1 custom instances | CPU: 19.3% | Dashboard:  Running
+2026-07-25 12:57:05,453 [INFO] 
+[46]  Status: 1 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 12:57:20,663 [INFO] 
+[47]  Status: 1 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 12:57:35,918 [INFO] 
+[48]  Status: 1 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 12:57:35,918 [INFO]  No scaling needed
+2026-07-25 12:57:51,104 [INFO] 
+[49]  Status: 1 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 12:58:06,320 [INFO] 
+[50]  Status: 1 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 12:58:21,517 [INFO] 
+[51]  Status: 1 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 12:58:36,721 [INFO] 
+[52]  Status: 1 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 12:58:36,721 [INFO]  No scaling needed
+2026-07-25 12:58:51,929 [INFO] 
+[53]  Status: 1 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 12:59:07,109 [INFO] 
+[54]  Status: 1 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 12:59:22,292 [INFO] 
+[55]  Status: 1 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 12:59:37,559 [INFO] 
+[56]  Status: 1 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 12:59:37,559 [INFO]  No scaling needed
+2026-07-25 12:59:52,805 [INFO] 
+[57]  Status: 1 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 13:00:08,173 [INFO] 
+[58]  Status: 1 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 13:00:23,443 [INFO] 
+[59]  Status: 1 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 13:00:38,637 [INFO] 
+[60]  Status: 1 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 13:00:38,637 [INFO]  No scaling needed
+2026-07-25 13:00:53,876 [INFO] 
+[61]  Status: 1 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 13:01:09,169 [INFO] 
+[62]  Status: 1 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 13:01:24,401 [INFO] 
+[63]  Status: 1 custom instances | CPU: 32.0% | Dashboard:  Running
+2026-07-25 13:01:24,402 [INFO]  Launching new EC2 instance...
+2026-07-25 13:01:26,008 [INFO]  Instance i-0ed002a495fa95358 launched successfully!
+2026-07-25 13:01:41,308 [INFO]  Instance i-0ed002a495fa95358 is now running
+2026-07-25 13:01:41,308 [INFO] 📈 SCALED UP: 1 → 2 | Reason: CPU 32.0% > 20%
+2026-07-25 13:01:56,787 [INFO] 
+[64]  Status: 2 custom instances | CPU: 32.0% | Dashboard:  Running
+2026-07-25 13:01:56,795 [INFO] ⏳ Cooldown: 14s remaining
+2026-07-25 13:02:12,067 [INFO] 
+[65]  Status: 2 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 13:02:12,067 [INFO] ⏳ Low traffic detected (0.0%), waiting 60s...
+2026-07-25 13:02:27,308 [INFO] 
+[66]  Status: 2 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 13:02:42,567 [INFO] 
+[67]  Status: 2 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 13:02:57,805 [INFO] 
+[68]  Status: 2 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 13:02:57,805 [INFO]  No scaling needed
+2026-07-25 13:03:13,087 [INFO] 
+[69]  Status: 2 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 13:03:13,820 [INFO]  Terminated EC2 instance: i-0ed002a495fa95358
+2026-07-25 13:03:13,825 [INFO] 📉 SCALED DOWN: 2 → 1 | Reason: CPU 0.0% < 10% for 60s
+2026-07-25 13:03:29,107 [INFO] 
+[70]  Status: 1 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 13:03:44,436 [INFO] 
+[71]  Status: 1 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 13:03:59,756 [INFO] 
+[72]  Status: 1 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 13:03:59,756 [INFO]  No scaling needed
+2026-07-25 13:04:15,009 [INFO] 
+[73]  Status: 1 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 13:04:30,255 [INFO] 
+[74]  Status: 1 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 13:04:45,577 [INFO] 
+[75]  Status: 1 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 13:05:00,827 [INFO] 
+[76]  Status: 1 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 13:05:00,827 [INFO]  No scaling needed
+2026-07-25 13:05:16,077 [INFO] 
+[77]  Status: 1 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 13:05:31,367 [INFO] 
+[78]  Status: 1 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 13:05:46,617 [INFO] 
+[79]  Status: 1 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 13:06:01,907 [INFO] 
+[80]  Status: 1 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 13:06:01,907 [INFO]  No scaling needed
+2026-07-25 13:06:17,147 [INFO] 
+[81]  Status: 1 custom instances | CPU: 97.2% | Dashboard:  Running
+2026-07-25 13:06:17,147 [INFO]  Launching new EC2 instance...
+2026-07-25 13:06:18,447 [INFO]  Instance i-03d271c1131bdbf6d launched successfully!
+2026-07-25 13:06:33,788 [INFO]  Instance i-03d271c1131bdbf6d is now running
+2026-07-25 13:06:33,798 [INFO] 📈 SCALED UP: 1 → 2 | Reason: CPU 97.2% > 20%
+2026-07-25 13:06:49,295 [INFO] 
+[82]  Status: 2 custom instances | CPU: 97.2% | Dashboard:  Running
+2026-07-25 13:06:49,295 [INFO] ⏳ Cooldown: 14s remaining
+2026-07-25 13:07:04,570 [INFO] 
+[83]  Status: 2 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 13:07:04,571 [INFO] ⏳ Low traffic detected (0.0%), waiting 60s...
+2026-07-25 13:07:19,844 [INFO] 
+[84]  Status: 2 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 13:07:19,845 [INFO]  No scaling needed
+2026-07-25 13:07:35,107 [INFO] 
+[85]  Status: 2 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 13:07:50,383 [INFO] 
+[86]  Status: 2 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 13:08:05,646 [INFO] 
+[87]  Status: 2 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 13:08:06,267 [INFO]  Terminated EC2 instance: i-03d271c1131bdbf6d
+2026-07-25 13:08:06,275 [INFO] 📉 SCALED DOWN: 2 → 1 | Reason: CPU 0.0% < 10% for 60s
+2026-07-25 13:08:21,561 [INFO] 
+[88]  Status: 1 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 13:08:21,561 [INFO]  No scaling needed
+2026-07-25 13:08:37,017 [INFO] 
+[89]  Status: 1 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 13:08:52,358 [INFO] 
+[90]  Status: 1 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 13:09:07,642 [INFO] 
+[91]  Status: 1 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 13:09:22,882 [INFO] 
+[92]  Status: 1 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 13:09:22,885 [INFO]  No scaling needed
+2026-07-25 13:09:38,237 [INFO] 
+[93]  Status: 1 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 13:09:55,299 [INFO] 
+[94]  Status: 1 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 13:12:21,705 [INFO] 
+[95]  Status: 1 custom instances | CPU: 0.0% | Dashboard:  Running
+2026-07-25 13:13:52,975 [INFO] 
+[96]  Status: 1 custom instances | CPU: 0.0% | Dashboard:  Not responding
+2026-07-25 13:13:53,238 [INFO]  No scaling needed

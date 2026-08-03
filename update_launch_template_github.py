@@ -23,7 +23,7 @@ def get_security_group_id():
             return instance['SecurityGroups'][0]['GroupId'], instance['ImageId']
     except:
         pass
-    return "sg-038eb0d4c394b341f", "ami-0c02fb55956c7d316"
+    return "sg-085d5d39c9a78ec78", "ami-0c02fb55956c7d316"
 
 def create_user_data_script():
     return '''#!/bin/bash
@@ -36,7 +36,7 @@ set -e
 exec > >(tee /var/log/user-data.log|logger -t user-data -s 2>/dev/console) 2>&1
 
 echo "=========================================="
-echo "🚀 Starting EC2 Setup (Full PySpark)"
+echo " Starting EC2 Setup (Full PySpark)"
 echo "=========================================="
 
 # Install dependencies (including Java and PySpark)
@@ -73,8 +73,8 @@ chmod +x *.sh *.py
 # Start the FULL pipeline (with PySpark)
 nohup ./run_all.sh > /var/log/pipeline.log 2>&1 &
 
-echo "✅ EC2 Setup Complete!"
-echo "📝 Pipeline logs: tail -f /var/log/pipeline.log"
+echo " EC2 Setup Complete!"
+echo " Pipeline logs: tail -f /var/log/pipeline.log"
 '''
 
 def update_launch_template():
@@ -112,10 +112,10 @@ def update_launch_template():
             LaunchTemplateName=LAUNCH_TEMPLATE_NAME,
             DefaultVersion=str(version)
         )
-        print(f"✅ Launch template version {version} created (t3.small)")
+        print(f" Launch template version {version} created (t3.small)")
         return version
     except Exception as e:
-        print(f"❌ Error: {e}")
+        print(f" Error: {e}")
         return None
 
 def update_asg():
@@ -131,21 +131,21 @@ def update_asg():
             MaxSize=3,
             DesiredCapacity=1
         )
-        print(f"✅ ASG '{ASG_NAME}' updated to t3.small")
+        print(f" ASG '{ASG_NAME}' updated to t3.small")
         return True
     except Exception as e:
-        print(f"❌ Error: {e}")
+        print(f" Error: {e}")
         return False
 
 if __name__ == "__main__":
     print("="*60)
-    print("🚀 Updating Launch Template to t3.small (with PySpark)")
+    print(" Updating Launch Template to t3.small (with PySpark)")
     print("="*60)
     
     version = update_launch_template()
     if version:
         update_asg()
-        print(f"\n✅ Complete! Template v{version} with t3.small")
-        print("\n📋 Instance Type: t3.small (2GB RAM, 2 vCPUs)")
-        print("📋 Includes: PySpark + Java + Full Pipeline")
-        print("\n🔄 Test: aws autoscaling set-desired-capacity --auto-scaling-group-name scalable-autoscaling --desired-capacity 2")
+        print(f"\n Complete! Template v{version} with t3.small")
+        print("\n Instance Type: t3.small (2GB RAM, 2 vCPUs)")
+        print(" Includes: PySpark + Java + Full Pipeline")
+        print("\n Test: aws autoscaling set-desired-capacity --auto-scaling-group-name scalable-autoscaling --desired-capacity 2")

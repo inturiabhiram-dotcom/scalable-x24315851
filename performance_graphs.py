@@ -19,7 +19,11 @@ class PerformanceGraphGenerator:
         
     def measure_latency_vs_rate(self):
         """Measure latency at different ingestion rates"""
+<<<<<<< HEAD
         print("\n  Measuring Latency vs Ingestion Rate...")
+=======
+        print("\n Measuring Latency vs Ingestion Rate...")
+>>>>>>> 6cc3086 (changes)
         
         # Simulated data based on actual system behavior
         rates = [10, 50, 100, 200, 500]
@@ -59,7 +63,11 @@ class PerformanceGraphGenerator:
     
     def measure_speedup_vs_workers(self):
         """Measure speedup with different worker counts"""
+<<<<<<< HEAD
         print("\n  Measuring Speedup vs Worker Count...")
+=======
+        print("\n Measuring Speedup vs Worker Count...")
+>>>>>>> 6cc3086 (changes)
         
         # Based on MapReduce performance (near-linear up to 4 cores)
         workers = [1, 2, 4, 8, 16]
@@ -92,7 +100,11 @@ class PerformanceGraphGenerator:
     
     def measure_throughput_over_time(self):
         """Measure throughput over time"""
+<<<<<<< HEAD
         print("\n  Measuring Throughput Over Time...")
+=======
+        print("\n Measuring Throughput Over Time...")
+>>>>>>> 6cc3086 (changes)
         
         # Get real throughput from S3 if available
         try:
@@ -136,7 +148,7 @@ class PerformanceGraphGenerator:
     def generate_graphs(self):
         """Generate all performance graphs"""
         print("\n" + "="*60)
-        print("📈 Generating Performance Graphs")
+        print(" Generating Performance Graphs")
         print("="*60)
         
         # Create directories
@@ -160,8 +172,13 @@ class PerformanceGraphGenerator:
         # Graph 4: Combined Dashboard
         self.plot_combined_dashboard(latency_data, speedup_data, throughput_data)
         
+<<<<<<< HEAD
         print("\n  All graphs generated!")
         print("📁 Location: graphs/ and static/graphs/")
+=======
+        print("\n All graphs generated!")
+        print(" Location: graphs/ and static/graphs/")
+>>>>>>> 6cc3086 (changes)
         
         # Upload to S3
         self.upload_graphs_to_s3()
@@ -191,7 +208,11 @@ class PerformanceGraphGenerator:
         plt.savefig('graphs/latency_vs_rate.png', dpi=150, bbox_inches='tight')
         plt.savefig('static/graphs/latency_vs_rate.png', dpi=150, bbox_inches='tight')
         plt.close()
+<<<<<<< HEAD
         print("    Generated latency_vs_rate.png")
+=======
+        print("   Generated latency_vs_rate.png")
+>>>>>>> 6cc3086 (changes)
     
     def plot_speedup_vs_workers(self, data):
         """Plot speedup vs worker count"""
@@ -232,7 +253,11 @@ class PerformanceGraphGenerator:
         plt.savefig('graphs/speedup_vs_workers.png', dpi=150, bbox_inches='tight')
         plt.savefig('static/graphs/speedup_vs_workers.png', dpi=150, bbox_inches='tight')
         plt.close()
+<<<<<<< HEAD
         print("    Generated speedup_vs_workers.png")
+=======
+        print("   Generated speedup_vs_workers.png")
+>>>>>>> 6cc3086 (changes)
     
     def plot_throughput_over_time(self, data):
         """Plot throughput over time"""
@@ -262,7 +287,11 @@ class PerformanceGraphGenerator:
         plt.savefig('graphs/throughput_over_time.png', dpi=150, bbox_inches='tight')
         plt.savefig('static/graphs/throughput_over_time.png', dpi=150, bbox_inches='tight')
         plt.close()
+<<<<<<< HEAD
         print("    Generated throughput_over_time.png")
+=======
+        print("   Generated throughput_over_time.png")
+>>>>>>> 6cc3086 (changes)
     
     def plot_combined_dashboard(self, latency_data, speedup_data, throughput_data):
         """Create a combined dashboard with all graphs"""
@@ -321,6 +350,7 @@ class PerformanceGraphGenerator:
         
         # Performance insights
         if max(speedup) > 3:
+<<<<<<< HEAD
             summary_text += "  Excellent parallel scaling!\n"
         elif max(speedup) > 1.5:
             summary_text += "  Good parallel scaling!\n"
@@ -329,6 +359,16 @@ class PerformanceGraphGenerator:
         
         if max(throughput) > 50:
             summary_text += "  High throughput achieved!\n"
+=======
+            summary_text += " Excellent parallel scaling!\n"
+        elif max(speedup) > 1.5:
+            summary_text += " Good parallel scaling!\n"
+        else:
+            summary_text += " Limited parallel scaling\n"
+        
+        if max(throughput) > 50:
+            summary_text += " High throughput achieved!\n"
+>>>>>>> 6cc3086 (changes)
         
         ax.text(0.1, 0.5, summary_text, transform=ax.transAxes, fontsize=12, 
                 verticalalignment='center', family='monospace')
@@ -337,11 +377,19 @@ class PerformanceGraphGenerator:
         plt.savefig('graphs/performance_dashboard.png', dpi=150, bbox_inches='tight')
         plt.savefig('static/graphs/performance_dashboard.png', dpi=150, bbox_inches='tight')
         plt.close()
+<<<<<<< HEAD
         print("    Generated performance_dashboard.png")
     
     def upload_graphs_to_s3(self):
         """Upload graphs to S3"""
         print("\n  Uploading graphs to S3...")
+=======
+        print("   Generated performance_dashboard.png")
+    
+    def upload_graphs_to_s3(self):
+        """Upload graphs to S3"""
+        print("\n Uploading graphs to S3...")
+>>>>>>> 6cc3086 (changes)
         
         graph_files = [
             'latency_vs_rate.png',
@@ -356,7 +404,11 @@ class PerformanceGraphGenerator:
             
             if os.path.exists(local_path):
                 self.s3.upload_file(local_path, S3_BUCKET, s3_key)
+<<<<<<< HEAD
                 print(f"    Uploaded {filename} to s3://{S3_BUCKET}/{s3_key}")
+=======
+                print(f"   Uploaded {filename} to s3://{S3_BUCKET}/{s3_key}")
+>>>>>>> 6cc3086 (changes)
 
 if __name__ == "__main__":
     generator = PerformanceGraphGenerator()
